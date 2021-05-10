@@ -9,7 +9,7 @@ class homeDepotScraper:
 
 ## General methods
     def __init__(self):
-        self.driver = driver = webdriver.Firefox(executable_path = r"C:\Users\grzeg\OneDrive\Pulpit\Point72\geckodriver.exe")
+        self.driver = webdriver.Firefox(executable_path = r"C:\Users\grzeg\OneDrive\Pulpit\Point72\geckodriver.exe")
         ## Maximizing window
         self.driver.maximize_window()
 
@@ -69,139 +69,146 @@ class homeDepotScraper:
         subdep = self.driver.find_element_by_xpath("//a[text() = {}]".format(subdepartment_name))
         subdep.click()
 
-## Dishwasher methods
-    def get_dishwasher_links(self):
-        ## This code is responsible for getting producer-specific links for dishwashers, which will be later passed for scraping. 
+    def get_brand_links(self, keyword):
+        ## After getting a page for a specific product (refrigerator, dishwasher), we will now get links for producer specific pages for the products 
+        ## The key-word used for this task differs between the products, so it is passed as a function's argument
+        ## For refrigerators it's Top Refrigerator Brands, for dishwashers it's just Brand
+        keyword = f"'{keyword}'"
+        brands = self.driver.find_elements_by_xpath(f"//p[contains(text(), {keyword} )]//following-sibling::ul//li//a")
 
-        # We want to browse through all dishwashers (later filtering by brands). We need to choose Shop All Dishwashers option first
-        # There are 2 elements with this property on the page but it doesn't matter which we click on.
-        all_dishwashers = self.driver.find_element_by_xpath("//a[contains(text(), 'Shop All Dishwashers')]")
-        all_dishwashers.click()
+        ## Sometimes the producer name is returned along with a trademark sign ®, for simplification we will remove it
+        self.brands_dictionary = {brand.get_attribute('text').replace("®",""): brand.get_attribute('href') for brand in brands}
 
-        time.sleep(2)
+        return self.brands_dictionary
 
-        ## Now the key-part is filtering. Filters for different properties are captured inside divs with class='dimension'. 
-        ## Locating all dimensions - which stand for filtering boxes 
-        dimensions = self.driver.find_elements_by_xpath("//div[@class='dimension']")
+    def get_product_links(self, selected_brands):
+        
+        ## This method is used to obtain all the links for a specific product for a particular producent. 
+        ## If we are working with Dishwashers, and brand are LG and Samsung, in this function the links to all LG and Samsung dishwashers will be gathered
 
-        ## For each dimension (filtering box) we can find its name and save it to dictionary
-        dimensions_dict = {}
-        for dimension in dimensions:
-            dimension_name = dimension.find_element_by_xpath('.//h2').text
-            dimensions_dict[dimension_name] = dimension
+        product_links = {}
+        ## Getting product links for a specific brand
+        for selected_brand in selected_brands:
+            brand_page = self.brands_dictionary[selected_brand]
+            self.driver.get(brand_page)
+            time.sleep(1)
 
-        ## From the dictionary created in a previous step we can now choose which filtering box we want to use - Brand in our case
-        ## Structure of each dimension is following
-        ## -- <div class='grid'>
-        ## ---- <div class='grid'>
-        ## ---- <div class='grid'>
-        ## Inside each div there is one main <div class='grid'> 
-        ## inside of which there are 2 <div class='grid'>, the first contains the name of the filter (e.g.Brand), 
-        ## the second is used for filtering. The second is the one we need
-        brand = dimensions_dict['Brand'].find_element_by_xpath(".//div[@class='grid']//div[@class='grid'][2]")
+            # First we need to create a logic for pagination, if there is such
+            paginations = self.driver.find_elements_by_xpath("//li[@class='hd-pagination__item']")
 
-        ## Now we have our brand filtering box located, but tp select desired brands we need to unhide all our options with + See All button
-        brand_see_all = brand.find_element_by_xpath(".//a[@class='dimension__see-all']")
-        brand_see_all.click()
-
-        ## Brands' data is available inside <div class='dimension__item col__12-12'>
-        brands = brand.find_elements_by_xpath(".//div[@class='dimension__item col__12-12']")
-
-        ## For each brand div, brand name and a link to brand-specific products can be retrieved
-
-        ## Again we can create a dictionary with brand name and checkbox webelement to easily navigate through them in future 
-        brands_dictionary = {}
-
-        for brand in brands:
-            ## Getting checkbox location
-            link = brand.find_element_by_xpath(".//a[@class='refinement__link']").get_attribute('href')
-            brand_name = brand.find_element_by_xpath(".//h3").text
-            
+            if len(paginations) == 0:
+                ## We get all the links of a specific product for a particular producer
+                links = self.driver.find_elements_by_xpath("//a[@class='header product-pod--ie-fix']")
+                links = [link.get_attribute('href') for link in links]
+                product_links[selected_brand] = links
+            else:
+                pages = [page.find_element_by_xpath("./a").get_attribute('href') for page in paginations]
+                links_per_brand = []
+                for page in pages: 
+                    self.driver.get(page)
+                    time.sleep(1)
+                    links = self.driver.find_elements_by_xpath("//a[@class='header product-pod--ie-fix']")
+                    links = [link.get_attribute('href') for link in links]
+                    links_per_brand.append(links)
                 
-            brands_dictionary[brand_name] = link
+                links_per_brand = [x for y in links_per_brand for x in y]
+                product_links[selected_brand] = links_per_brand
 
-        return brands_dictionary
+        self.product_links = product_links
 
-    def extract_metadata_dishwashers(self, shop_ref, selected_brand, product_info):
-        ## Each page with dishwashers data, consists of standarized blocks which contain the same set of information for different dishwashers
-        ## This function is used to retrieve necessary information for each dishwasher
+        return product_links
 
-        ## Getting rating, this is quite tricky, as rating is shown in page as stars (0-min;5max). 
-        ## However, there is style:width property for that star representation, out of which we can scrape the actual %rating
-        rating = product_info.find_element_by_xpath(".//span[@class='stars']").get_attribute('style')
-        rating = rating.replace("width:", "")
-        rating = rating.replace("%", "").replace(";", "")
+
+    def get_other_details(self, detail_name):
+        ## A lot of product-related information is provided in the tabular form. With this function, user can retrieve any existing information.
+        detail_name_formatted = f"'{detail_name}'"
+
+        ## This error handling is introduced in case some information is not available
+        try:
+            element = self.driver.find_element_by_xpath(f"//div[text()={detail_name_formatted}]//parent::div")
+            element = self.driver.find_element_by_xpath(f"//div[text()={detail_name_formatted}]//following-sibling::div")
+            detail = element.text
+        except:
+            detail = None
+
+        return detail
+
+    def get_metadata(self):
+        ## Method to get all desired product information
+        ## getting metadata
+        ## User specifies other detiles as a list of details. 
+
+        model = self.driver.find_element_by_xpath("//h2[contains(text(),'Model')]").text
+
+        rating = self.driver.find_element_by_xpath("//span[@class='stars']").get_attribute('style')
+        rating = rating.replace("width: ", "").replace("%", "").replace(";","")
         rating = float(rating)
-        
-        number_of_rates = product_info.find_element_by_xpath(".//span[@class='product-pod__ratings-count']").text
-        number_of_rates = number_of_rates.replace(")", "").replace("(", "")
-        number_of_rates = int(number_of_rates)
-        
-        model = product_info.find_element_by_xpath(".//div[@class='product-pod__model']").text
-        
-        ## The price is also not available in a straightforward way, so it must be obtained in steps
-        price_elements = [price.text for price in product_info.find_elements_by_xpath(".//div[@class='price-format__main-price']//span")]
-        # sometimes there is no price, so further formatting actions cannot be completed
-        if len(price_elements) == 0:
-            price = None
-        else:
-            price_elements.remove("$")
-            ## Now we can join the rest into a final number and have it as float
-            price = float(".".join(price_elements))
-        
-        
-        
-        ## In the end we can access additional information provided
-        additional_infos = product_info.find_elements_by_xpath(".//div[@class='kpf__specblock kpf__specblock--simple kpf__specblock--one-column col__12-12 col__12-12--xs']")
-        
-        ## Attribute names and their values are separated by \n, so we split on this
-        additional_infos = [info.text.split("\n")[1] for info in additional_infos]
-        tub_material, sound_rating, height, size, control_location = additional_infos
-        
-    
-        return (shop_ref, selected_brand, rating, number_of_rates, model, price, tub_material, sound_rating, height, size, control_location)
 
-    def scrape_dishwasher_data(self, link, shop_ref, selected_brand):
+        number_of_rates = self.driver.find_element_by_xpath("//span[@class='product-details__review-count']").text
+        number_of_rates = int(number_of_rates.replace("(","").replace(")",""))
+
+        is_on_display = self.driver.find_elements_by_xpath("//span[text()='On Display']")
+        ## If it's not on display, an element won't be found, so in such a case we set it to No. Otherwise, it's Yes (On Display)
+        if len(is_on_display) == 0:
+            is_on_display = "No"
+        else:
+            is_on_display = "Yes"
+
+        # ## The price is also not available in a straightforward way, so it must be obtained in steps
+        # price_elements = [price.text for price in self.driver.find_elements_by_xpath(".//div[@class='price']//span")]
+
+        # ## We need to remove dollar sign and some empty string which are found in the same block as the price
+        # price_elements.remove("$")
+        # price_elements = [x for x in price_elements if x!= '']
+
+        # ## Now we can join the rest into a final number and have it as float
+        # price = float(".".join(price_elements))
+
+        price_elements = self.driver.find_elements_by_xpath(".//div[@class='price-format__large price-format__main-price']")[0]
+        price_elements = [element.text for element in price_elements.find_elements_by_xpath(".//span")]
+
+        ## We need to remove dollar sign and some empty string which are found in the same block as the price
+        price_elements.remove("$")
+        price_elements = [x for x in price_elements if x!= '']
+
+        ## Now we can join the rest into a final number and have it as float
+        price = float(".".join(price_elements))
+
         
-        ## First we load a page with dishwashers from a specific manufacturer
-        self.driver.get(link)
+        ## Creating the list with the results for a specific product
+        results = [model, rating, number_of_rates, price, is_on_display]
+
+        ## We need to scroll-down to get other details
+        self.driver.execute_script("window.scrollBy(0,4500)", "")
         time.sleep(1)
 
-        ## Creating empty list which will be used for saving final results
-        dishwasher_data = []
-        ## Next we need to create a logic for pagination, if there is such
-        paginations = self.driver.find_elements_by_xpath("//li[@class='hd-pagination__item']")
-
-        if len(paginations) == 0:
-            ## Now we can retrieve info for all the products available at the page
-            products_info = self.driver.find_elements_by_xpath("//div[@class='desktop product-pod']")
-            for product_info in products_info: 
-                results = self.extract_metadata_dishwashers(shop_ref, selected_brand, product_info)
-                print(results, "\n")
-                dishwasher_data.append(results)
+        ## Now we are appending other details to results
+        for detail_name in self.other_details: 
+            detail = self.get_other_details(detail_name)
+            results.append(detail)
         
-        else: 
-            ## In case there are other pages, we can get their urls
-            pages = [page.find_element_by_xpath("./a").get_attribute('href') for page in paginations]
+        return results
 
-            for page in pages: 
-                self.driver.get(page)
-                time.sleep(1)
-                products_info = self.driver.find_elements_by_xpath("//div[@class='desktop product-pod']")
-
-                for product_info in products_info: 
-                    results = self.extract_metadata_dishwashers(shop_ref, selected_brand, product_info)
-                    print(results, "\n")
-                    dishwasher_data.append(results)
+    def get_metadata_all(self, other_details):
         
-        return dishwasher_data
+        final_results = []
+        ## Now we are running get_metadata for all the links obtained in get_product_links
+        self.other_details = other_details
 
-## Refrigerator methods
-    def get_refrigerator_links(self):
-        ## Structure of refrigerator page is slightly different then this for dishwashers. The links for producer-specific pages must be then obtained in a different manner
-        brands = self.driver.find_elements_by_xpath("//p[contains(text(), 'Top Refrigerator Brands')]//following-sibling::ul//li//a")
-        brands_dictionary = {brand.get_attribute('text'): brand.get_attribute('href') for brand in brands}
-        return brands_dictionary
+        for producer, product_links in self.product_links.items():
+
+            for product_link in product_links:
+                
+                self.driver.get(product_link)
+                time.sleep(2)
+                results = self.get_metadata()
+                results = [producer, product_link] + results
+                # print(results)
+                final_results.append(results)
+                
+            
+        
+        return final_results
 
 ######### Dishwasher Scraper
 def dishwasher_scraper(selected_stores, selected_brands):
@@ -234,8 +241,8 @@ def dishwasher_scraper(selected_stores, selected_brands):
 
         for selected_brand in selected_brands:
             link = brands_dictionary[selected_brand]
-            dishwasher_data = scraper.scrape_dishwasher_data(link, shop_details, selected_brand)
-            final_results.append(dishwasher_data)
+            data = scraper.scrape_data(link, shop_details, selected_brand)
+            final_results.append(data)
 
     final_results = [x for y in final_results for x in y]
     
@@ -253,17 +260,8 @@ selected_stores = {
 
 }
 
-## There are 3 different LG brands, although LG STUDIO and LG SIGNATURE seems to be some legacy ones. 
-selected_brands_dishwasher = ["Samsung", "LG Electronics", "LG STUDIO", "LG SIGNATURE"]
 
-
-# dishwasher_scraper(selected_stores, selected_brands_dishwasher)
-
-########## Refrigeator scraper
-
-selected_brands_refrigerator = ['Whirpool', 'GE Appliances']
-
-def refrigerator_scraper(selected_stores, selected_brands_refrigerator):
+def scraper(selected_stores, selected_brands, product_type, other_details):
     
     ## Initiating scraping class
     scraper = homeDepotScraper()
@@ -285,13 +283,41 @@ def refrigerator_scraper(selected_stores, selected_brands_refrigerator):
         ## Selecting a store
         scraper.select_store(postal_code)
 
-        ## Going to dishwashers section
-        scraper.get_subdepartment_data('Refrigerators')
+        if product_type == 'Dishwashers':
+            ## Going to refrigerators section
+            scraper.get_subdepartment_data('Dishwashers')
+            ## Getting links with refrigerators produced by specific manufacturers
+            scraper.get_brand_links('Brands')
 
-        ## Getting links with dishwashers produced by specific manufacturers
-        brands_dictionary = scraper.get_refrigerator_links()
+        elif product_type == 'Refrigerators':
+            scraper.get_subdepartment_data('Refrigerators')
+            scraper.get_brand_links("Top Refrigerator Brands")
 
-        print(brands_dictionary)
+        else:
+            pass
 
+        ## Now we are getting direct links to products 
+        product_links = scraper.get_product_links(selected_brands)
+        
+        ## Now we are running a method which extracts all relevant information for obtained links. 
+        ## For the function to run properly, we need to specify the list other_details
+        ## Inside which user can specify the name of the attributes, one wants to retrieve from a specific product page.
+        ## Some of the attributes are returned on default:  model, rating, number_of_rates, price, is_on_display
+        ## The rest must be specified by the user - For the names of the attributes scroll down to where the tables with information are (mid-page)
 
-refrigerator_scraper(selected_stores, selected_brands_refrigerator)
+        ## For simplification we retrieve 5 additional attributes, can be many more
+        results = scraper.get_metadata_all(other_details)
+        
+        ## Adding shop name to final results
+        results = [[shop_details] + x for x in results]
+        final_results.append(results)
+    
+    final_results = [x for y in final_results for x in y]
+
+    df = pd.DataFrame(final_results, columns = ['Shop', 'Producer', 'Link', 'Model', 'Rating (%)', 'Number of Rates', 'Price', 'On Display', 
+    'Color/Finish', 'Energy Consumption (kWh/year)','Decibel (Sound) Rating', 'Product Height (in.)', 'Dishwasher Size'])
+    df.to_excel('dishwasher.xlsx')
+
+selected_brands_dishwashers = ["Samsung", "LG"]
+other_details_dishwasher = ['Color/Finish', 'Energy Consumption (kWh/year)','Decibel (Sound) Rating', 'Product Height (in.)', 'Dishwasher Size']
+scraper(selected_stores, selected_brands_dishwashers, "Dishwashers",other_details_dishwasher)
