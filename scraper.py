@@ -2,6 +2,9 @@ from typing_extensions import final
 from selenium import webdriver
 import time
 import pandas as pd
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 
 
@@ -16,38 +19,39 @@ class homeDepotScraper:
     def get_homepage(self):
          ## Going to homedepot home page
         self.driver.get("https://www.homedepot.com/")
-        time.sleep(2)
 
     def select_store(self, postal_code):
         ## Function used to select the store based on the postal code - When full name is used for searching, nothing is found. 
 
         ## Selecting your shop
-        shop_selector = self.driver.find_element_by_xpath("//div[@class='MyStore__store']")
+        shop_selector = WebDriverWait(self.driver, timeout = 60).until(
+            EC.element_to_be_clickable((By.XPATH,"//div[@class='MyStore__store']"))
+        )
         shop_selector.click()
 
-        time.sleep(1)
         ## It provides us with pop-up window on which we need to click Find Other Stores
-        find_other_stores = self.driver.find_element_by_xpath("//div[@id='myStoreDropdown']//a[./span[contains(text(), 'Find Other Stores')]]")
+        find_other_stores = WebDriverWait(self.driver, timeout = 60).until(
+            EC.element_to_be_clickable((By.XPATH,"//div[@id='myStoreDropdown']//a[./span[contains(text(), 'Find Other Stores')]]"))
+        )
         find_other_stores.click()
 
-        time.sleep(0.5)
+        
         ## Now we need to input our desired store's location
-        store_input_field = self.driver.find_element_by_xpath("//input[@id='myStore-formInput']")
-
+        store_input_field = WebDriverWait(self.driver, timeout = 60).until(
+            EC.presence_of_element_located((By.XPATH, "//input[@id='myStore-formInput']"))
+        )
         ## Postal-code is used for search - the direct name throws an nothing found error
         store_input_field.send_keys(postal_code)
 
         store_search_button = self.driver.find_element_by_xpath("//button[@id='myStore-formButton']")
         store_search_button.click()
 
-        time.sleep(0.5)
         ## Now we just need to select our store (a few will be listed, however the one best matching with our postal code will be listed as first)
-        select_store_button = self.driver.find_element_by_xpath("""//button[@class='localization__select-this-store bttn-outline bttn-outline--dark']""")
+        select_store_button = WebDriverWait(self.driver, timeout = 60).until(
+            EC.presence_of_element_located((By.XPATH, "//button[@class='localization__select-this-store bttn-outline bttn-outline--dark']"))
+        )
 
         select_store_button.click()
-
-        ## We should wait a while before proceding to further actions
-        time.sleep(2)
         ## After that the store is selected and we can proceed with scraping data for a specific product-manufacturer
 
     def get_subdepartment_data(self, subdepartment_name):
@@ -55,19 +59,18 @@ class homeDepotScraper:
         ## This code is responsible for taking us to the page related to the specific subdepartment (dishwashers, refrigerators, mattresses)
 
         ## Finding All Departments on navigation bar and clicking it
-        departments_list = self.driver.find_element_by_xpath("//a[@data-id='departmentsFlyout']")
+        departments_list = WebDriverWait(self.driver, timeout = 60).until(
+            EC.presence_of_element_located((By.XPATH, "//a[@data-id='departmentsFlyout']"))
+        )
         departments_list.click()
 
-        ## We need to wait for a page to fully load - We will be sure about that when the page's title is available. 
-        # wait = WebDriverWait(self.driver, timeout = 3)
-        # department_page = wait.until(EC.presence_of_element_located((By.XPATH, "//h1[@class='page-header]")))
-        time.sleep(3)
-
+        
         ## After that we get a page with all the departments and subdepartments available. From here we can choose between our needs 
         ## (Dishwashers, Refrigeators, Mattresses in this case). 
         subdepartment_name = "'{}'".format(subdepartment_name)
-        print(subdepartment_name)
-        subdep = self.driver.find_element_by_xpath("//a[text() = {}]".format(subdepartment_name))
+        subdep = WebDriverWait(self.driver, timeout = 60).until(
+            EC.presence_of_element_located((By.XPATH, "//a[text() = {}]".format(subdepartment_name)))
+        )
         subdep.click()
 
 
@@ -77,6 +80,10 @@ class homeDepotScraper:
         ## The key-word used for this task differs between the products, so it is passed as a function's argument
         ## For refrigerators it's Top Refrigerator Brands, for dishwashers it's just Brand
         keyword = f"'{keyword}'"
+        
+        brands =  WebDriverWait(self.driver, timeout = 60).until(
+            EC.presence_of_element_located((By.XPATH, f"//p[contains(text(), {keyword} )]//following-sibling::ul//li//a"))
+        )
         brands = self.driver.find_elements_by_xpath(f"//p[contains(text(), {keyword} )]//following-sibling::ul//li//a")
 
         ## Sometimes the producer name is returned along with a trademark sign ®, for simplification we will remove it
@@ -85,20 +92,32 @@ class homeDepotScraper:
         return self.brands_dictionary
 
     def get_brand_links_mattresses(self):
-        time.sleep(2)
+        
+        # time.sleep(2)
+        # self.driver.execute_script("window.scrollBy(0,4000)", "")
+        # time.sleep(1)
+
+        ## First we need to find brand selection box and click See All
+        # brand_dimension = self.driver.find_element_by_xpath("//div[@class='dimension' and .//h2[text()='Brand']]")
         self.driver.execute_script("window.scrollBy(0,4000)", "")
         time.sleep(1)
-        ## First we need to find brand selection box and click See All
-        brand_dimension = self.driver.find_element_by_xpath("//div[@class='dimension' and .//h2[text()='Brand']]")
-        brand_dimension.find_element_by_xpath(".//a[@class='dimension__see-all']").click()
+
+        see_all_button = WebDriverWait(self.driver, timeout = 60).until(
+            EC.element_to_be_clickable((By.XPATH, "//div[@class='dimension' and .//h2[text()='Brand']]//a[@class='dimension__see-all']"))
+        )
+        see_all_button.click()
+        # brand_dimension.find_element_by_xpath(".//a[@class='dimension__see-all']").click()
         
+        brand_dimension = WebDriverWait(self.driver, timeout = 60).until(
+            EC.presence_of_element_located((By.XPATH, "//div[@class='dimension' and .//h2[text()='Brand']]//div[@class='dimension__item col__12-12']"))
+        )
+        brand_dimension = self.driver.find_elements_by_xpath("//div[@class='dimension' and .//h2[text()='Brand']]//div[@class='dimension__item col__12-12']")
         brands_dictionary = {}
 
-        for brand_row in brand_dimension.find_elements_by_xpath(".//div[@class='dimension__item col__12-12']"):
+        for brand_row in brand_dimension:
             brand = brand_row.find_element_by_xpath(".//h3[@class='refinement__link']").text
             brand_link = brand_row.find_element_by_xpath(".//a[@class='refinement__link']").get_attribute('href')
             brands_dictionary[brand] = brand_link
-
         self.brands_dictionary = brands_dictionary
 
         return self.brands_dictionary
@@ -146,8 +165,8 @@ class homeDepotScraper:
 
         ## This error handling is introduced in case some information is not available
         try:
-            element = self.driver.find_element_by_xpath(f"//div[text()={detail_name_formatted}]//parent::div")
-            element = self.driver.find_element_by_xpath(f"//div[text()={detail_name_formatted}]//following-sibling::div")
+            # element = self.driver.find_element_by_xpath(f"//div[text()={detail_name_formatted}]//parent::div")
+            element = self.driver.find_element_by_xpath(f"//div[@class='specifications__wrapper']//div[text()={detail_name_formatted}]//following-sibling::div")
             detail = element.text
         except:
             detail = None
@@ -412,15 +431,15 @@ selected_stores = {
 
 }
 
-# ## Scraping dishwashers
-# selected_brands_dishwashers = ["Samsung", "LG", "Electrolux"]
-# other_details_dishwasher = ['Color/Finish', 'Energy Consumption (kWh/year)','Decibel (Sound) Rating', 'Product Height (in.)', 'Dishwasher Size']
-# scraper(selected_stores, selected_brands_dishwashers, "Dishwashers",other_details_dishwasher)
+## Scraping dishwashers
+selected_brands_dishwashers = ["Samsung", "LG", "Electrolux"]
+other_details_dishwasher = ['Color/Finish', 'Energy Consumption (kWh/year)','Decibel (Sound) Rating', 'Product Height (in.)', 'Dishwasher Size']
+scraper(selected_stores, selected_brands_dishwashers, "Dishwashers",other_details_dishwasher)
 
-# ## Scraping refrigerators
-# selected_brands_refrigerators = ['Whirlpool', 'GE Appliances']
-# other_details_refrigerators = ['Appliance Type'', Color/Finish', 'Energy Consumption (kWh/year)', 'Refrigerator Capacity (cu. ft.)', 'Product Height (in.)']
-# scraper(selected_stores, selected_brands_refrigerators, "Refrigerators",other_details_refrigerators)
+## Scraping refrigerators
+selected_brands_refrigerators = ['Whirlpool', 'GE Appliances']
+other_details_refrigerators = ['Appliance Type', 'Color/Finish', 'Energy Consumption (kWh/year)', 'Refrigerator Capacity (cu. ft.)', 'Product Height (in.)']
+scraper(selected_stores, selected_brands_refrigerators, "Refrigerators",other_details_refrigerators)
 
 ## Scraping mattresses
 selected_brands_mattresses = ['Sealy']

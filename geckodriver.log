@@ -1852,8 +1852,9 @@ JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vend
 JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
 JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
 JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
-1620725759656	geckodriver	INFO	Listening on 127.0.0.1:62127
-1620725762693	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\grzeg\\AppData\\Local\\Temp\\rust_mozprofileF9TsCE"
+[Parent 31668, IPC I/O Parent] WARNING: file /builds/worker/checkouts/gecko/ipc/chromium/src/base/process_util_win.cc:167
+1620727763799	Marionette	INFO	Stopped listening on port 61539
+round" "-no-remote" "-profile" "C:\\Users\\grzeg\\AppData\\Local\\Temp\\rust_mozprofileF9TsCE"
 1620725762928	Marionette	INFO	Marionette enabled
 console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
 1620725764478	Marionette	INFO	Listening on port 62138
@@ -1919,8 +1920,9 @@ JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vend
 JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
 JavaScript error: https://homedepot.ugc.bazaarvoice.com/static/1999aa/bvapi.js, line 7: NS_ERROR_NOT_INITIALIZED: 
 JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
-1620726236780	geckodriver	INFO	Listening on 127.0.0.1:64229
-1620726239807	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\grzeg\\AppData\\Local\\Temp\\rust_mozprofilekmBMxy"
+[Parent 12084, IPC I/O Parent] WARNING: file /builds/worker/checkouts/gecko/ipc/chromium/src/base/process_util_win.cc:167
+1620727763798	Marionette	INFO	Stopped listening on port 62138
+round" "-no-remote" "-profile" "C:\\Users\\grzeg\\AppData\\Local\\Temp\\rust_mozprofilekmBMxy"
 1620726240062	Marionette	INFO	Marionette enabled
 console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
 1620726241753	Marionette	INFO	Listening on port 64243
@@ -1972,9 +1974,10 @@ TimedPromise/<@chrome://marionette/content/sync.js:237:19
 TimedPromise@chrome://marionette/content/sync.js:222:10
 interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
 webdriverClickElement@chrome://marionette/content/interaction.js:179:31
-1620726543594	geckodriver	INFO	Listening on 127.0.0.1:64908
-1620726546645	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\grzeg\\AppData\\Local\\Temp\\rust_mozprofile39Wq38"
-1620726546869	Marionette	INFO	Marionette enabled
+[Parent 6680, IPC I/O Parent] WARNING: file /builds/worker/checkouts/gecko/ipc/chromium/src/base/process_util_win.cc:167
+[Parent 6680, IPC I/O Parent] WARNING: file /builds/worker/checkouts/gecko/ipc/chromium/src/base/process_util_win.cc:167
+1620727763798	Marionette	INFO	Stopped listening on port 64243
+NFO	Marionette enabled
 console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
 1620726548433	Marionette	INFO	Listening on port 64918
 1620726548687	Marionette	WARN	TLS certificate errors will be ignored for this session
@@ -2009,3 +2012,457 @@ JavaScript error: https://assets.thdstatic.com/experiences/hd-home/vendors.3ef6b
 
 ###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
 
+1620727680494	geckodriver	INFO	Listening on 127.0.0.1:50096
+1620727683527	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\grzeg\\AppData\\Local\\Temp\\rust_mozprofileFfbCWj"
+1620727683753	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1620727685265	Marionette	INFO	Listening on port 50105
+1620727685581	Marionette	WARN	TLS certificate errors will be ignored for this session
+[Parent 19612, IPC I/O Parent] WARNING: file /builds/worker/checkouts/gecko/ipc/chromium/src/base/process_util_win.cc:167
+1620727763711	Marionette	INFO	Stopped listening on port 50105
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+7733908	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1620727735426	Marionette	INFO	Listening on port 50281
+1620727735742	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://www.homedepot.com/, line 39: InvalidStateError: responseText is only available if responseType is '' or 'text'.
+JavaScript error: https://www.homedepot.com/, line 39: InvalidStateError: responseText is only available if responseType is '' or 'text'.
+JavaScript error: https://www.homedepot.com/, line 39: InvalidStateError: responseText is only available if responseType is '' or 'text'.
+1620727753039	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: , line 0: NotFoundError: No such JSWindowActor 'MarionetteCommands'
+[Parent 14580, IPC I/O Parent] WARNING: file /builds/worker/checkouts/gecko/ipc/chromium/src/base/process_util_win.cc:167
+1620727763852	Marionette	INFO	Stopped listening on port 50281
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1620727857227	geckodriver	INFO	Listening on 127.0.0.1:50574
+1620727860310	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\grzeg\\AppData\\Local\\Temp\\rust_mozprofileo01FVn"
+1620727860546	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1620727862080	Marionette	INFO	Listening on port 50584
+1620727862370	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: , line 0: NotFoundError: No such JSWindowActor 'MarionetteCommands'
+1620728534087	Marionette	INFO	Stopped listening on port 50584
+0728120467	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\grzeg\\AppData\\Local\\Temp\\rust_mozprofileGCTsVp"
+1620728120691	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1620728122245	Marionette	INFO	Listening on port 50952
+1620728122521	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://www.homedepot.com/, line 39: InvalidStateError: responseText is only available if responseType is '' or 'text'.
+JavaScript error: https://www.homedepot.com/, line 39: InvalidStateError: responseText is only available if responseType is '' or 'text'.
+1620728131582	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1620728534073	Marionette	INFO	Stopped listening on port 50952
+0728291458	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\grzeg\\AppData\\Local\\Temp\\rust_mozprofileOaNz40"
+1620728291683	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1620728293126	Marionette	INFO	Listening on port 51251
+1620728293501	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://www.homedepot.com/, line 39: InvalidStateError: responseText is only available if responseType is '' or 'text'.
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+JavaScript error: resource:///actors/ContentMetaChild.jsm, line 179: InvalidStateError: JSWindowActorChild.sendAsyncMessage: JSWindowActorChild cannot send at the moment
+1620728303125	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+1620728534103	Marionette	INFO	Stopped listening on port 51251
+0728333392	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\grzeg\\AppData\\Local\\Temp\\rust_mozprofilee15tVW"
+1620728333618	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1620728335257	Marionette	INFO	Listening on port 51462
+1620728335449	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://www.homedepot.com/, line 39: InvalidStateError: responseText is only available if responseType is '' or 'text'.
+1620728344899	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+[Parent 17776, IPC I/O Parent] WARNING: file /builds/worker/checkouts/gecko/ipc/chromium/src/base/process_util_win.cc:167
+[Parent 17776, IPC I/O Parent] WARNING: file /builds/worker/checkouts/gecko/ipc/chromium/src/base/process_util_win.cc:167
+1620728534096	Marionette	INFO	Stopped listening on port 51462
+TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+[Parent 28188, IPC I/O Parent] WARNING: file /builds/worker/checkouts/gecko/ipc/chromium/src/base/process_util_win.cc:167
+1620728534081	Marionette	INFO	Stopped listening on port 51707
+round" "-no-remote" "-profile" "C:\\Users\\grzeg\\AppData\\Local\\Temp\\rust_mozprofileJvLPJA"
+1620728491231	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1620728492992	Marionette	INFO	Listening on port 51967
+1620728493055	Marionette	WARN	TLS certificate errors will be ignored for this session
+1620728502407	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+[Parent 6412, IPC I/O Parent] WARNING: file /builds/worker/checkouts/gecko/ipc/chromium/src/base/process_util_win.cc:167
+1620728534172	Marionette	INFO	Stopped listening on port 51967
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1620728580446	geckodriver	INFO	Listening on 127.0.0.1:52212
+1620728583517	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\grzeg\\AppData\\Local\\Temp\\rust_mozprofileqqH6Yf"
+1620728583749	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1620728585131	Marionette	INFO	Listening on port 52222
+1620728585563	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://www.homedepot.com/, line 39: InvalidStateError: responseText is only available if responseType is '' or 'text'.
+1620728594445	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+1620729356897	Marionette	INFO	Stopped listening on port 52222
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+ "C:\\Users\\grzeg\\AppData\\Local\\Temp\\rust_mozprofile9ON17T"
+1620728643731	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1620728645256	Marionette	INFO	Listening on port 52429
+1620728645539	Marionette	WARN	TLS certificate errors will be ignored for this session
+1620729356929	Marionette	INFO	Stopped listening on port 52429
+0728721198	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\grzeg\\AppData\\Local\\Temp\\rust_mozprofilehstin4"
+1620728721434	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1620728723040	Marionette	INFO	Listening on port 52677
+1620728723248	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://www.homedepot.com/, line 39: InvalidStateError: responseText is only available if responseType is '' or 'text'.
+[Parent 468, IPC I/O Parent] WARNING: file /builds/worker/checkouts/gecko/ipc/chromium/src/base/process_util_win.cc:167
+[Parent 468, IPC I/O Parent] WARNING: file /builds/worker/checkouts/gecko/ipc/chromium/src/base/process_util_win.cc:167
+1620729356891	Marionette	INFO	Stopped listening on port 52677
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+(new Error("", "(unknown module)"))
+1620728884544	Marionette	INFO	Listening on port 52989
+1620728884795	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://dev.virtualearth.net/webservices/v1/LoggingService/LoggingService.svc/Log?entry=0&fmt=1&type=3&group=MapControl&name=MVC&version=v8&mkt=pl-PL&auth=AoKTFnu3hdkRgVWl45fcxdz0WSDP6hroMDcPKXE4ZkQql3hPt3PtkCDwtNRCYgYA&jsonp=Microsoft.Maps.NetworkCallbacks.f_logCallbackRequest, line 1: TypeError: Microsoft.Maps.NetworkCallbacks.f_logCallbackRequest is not a function
+JavaScript error: https://dev.virtualearth.net/webservices/v1/LoggingService/LoggingService.svc/Log?entry=0&fmt=1&type=3&group=MapControl&name=MVC&version=v8&mkt=pl-PL&auth=AoKTFnu3hdkRgVWl45fcxdz0WSDP6hroMDcPKXE4ZkQql3hPt3PtkCDwtNRCYgYA&jsonp=Microsoft.Maps.NetworkCallbacks.f_logCallbackRequest, line 1: TypeError: Microsoft.Maps.NetworkCallbacks.f_logCallbackRequest is not a function
+JavaScript error: https://dev.virtualearth.net/webservices/v1/LoggingService/LoggingService.svc/Log?entry=0&fmt=1&type=3&group=MapControl&name=MVC&version=v8&mkt=pl-PL&auth=AoKTFnu3hdkRgVWl45fcxdz0WSDP6hroMDcPKXE4ZkQql3hPt3PtkCDwtNRCYgYA&jsonp=Microsoft.Maps.NetworkCallbacks.f_logCallbackRequest, line 1: TypeError: Microsoft.Maps.NetworkCallbacks.f_logCallbackRequest is not a function
+JavaScript error: https://dev.virtualearth.net/webservices/v1/LoggingService/LoggingService.svc/Log?entry=0&fmt=1&type=3&group=MapControl&name=MVC&version=v8&mkt=pl-PL&auth=AoKTFnu3hdkRgVWl45fcxdz0WSDP6hroMDcPKXE4ZkQql3hPt3PtkCDwtNRCYgYA&jsonp=Microsoft.Maps.NetworkCallbacks.f_logCallbackRequest, line 1: TypeError: Microsoft.Maps.NetworkCallbacks.f_logCallbackRequest is not a function
+JavaScript error: https://dev.virtualearth.net/webservices/v1/LoggingService/LoggingService.svc/Log?entry=0&fmt=1&type=3&group=MapControl&name=MVC&version=v8&mkt=pl-PL&auth=AoKTFnu3hdkRgVWl45fcxdz0WSDP6hroMDcPKXE4ZkQql3hPt3PtkCDwtNRCYgYA&jsonp=Microsoft.Maps.NetworkCallbacks.f_logCallbackRequest, line 1: TypeError: Microsoft.Maps.NetworkCallbacks.f_logCallbackRequest is not a function
+JavaScript error: https://dev.virtualearth.net/webservices/v1/LoggingService/LoggingService.svc/Log?entry=0&fmt=1
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+JavaScript error: https://assets.thdstatic.com/experiences/hd-home/vendors.3ef6bb46a59a1d486697.js, line 1: AbortError: The operation was aborted. 
+
+###!!! [Parent][RunMess1620729356897	Marionette	INFO	Stopped listening on port 52989
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1d486697.js, line 1: AbortError: The operation was aborted. 
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+[Parent 3088, IPC I/O Parent] WARNING: file /builds/worker/checkouts/gecko/ipc/chromium/src/base/process_util_win.cc:167
+1620729356908	Marionette	INFO	Stopped listening on port 53193
+1620729611509	geckodriver	INFO	Listening on 127.0.0.1:54280
+1620729614550	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\grzeg\\AppData\\Local\\Temp\\rust_mozprofilefc24kl"
+1620729614789	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1620729616162	Marionette	INFO	Listening on port 54289
+1620729616600	Marionette	WARN	TLS certificate errors will be ignored for this session
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel error: cannot send/recv
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+[Parent 29276, IPC I/O Parent] WARNING: file /builds/worker/checkouts/gecko/ipc/chromium/src/base/process_util_win.cc:167
+1620731564984	Marionette	INFO	Stopped listening on port 54289
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+1620730007000	Marionette	INFO	Listening on port 55184
+1620730007240	Marionette	WARN	TLS certificate errors will be ignored for this session
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+[Child 23956, MediaDecoderStateMachine #1] WARNING: Decoder=1bfe7ce6400 state=DECODING_METADATA Decode metadata failed, shutting down decoder: file /builds/worker/checkouts/gecko/dom/media/MediaDecoderStateMachine.cpp:366
+[Child 23956, MediaDecoderStateMachine #1] WARNING: Decoder=1bfe7ce6400 Decode error: NS_ERROR_DOM_MEDIA_METADATA_ERR (0x806e0006): file /builds/worker/checkouts/gecko/dom/media/MediaDecoderStateMachine.cpp:3478
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+
+###!!! [Parent][RunMessage] Error: Channel error: cannot send/recv
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+1620731565020	Marionette	INFO	Stopped listening on port 55184
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+"--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\grzeg\\AppData\\Local\\Temp\\rust_mozprofileJ7rcJh"
+1620730139024	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1620730140472	Marionette	INFO	Listening on port 55796
+1620730140811	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://www.homedepot.com/, line 39: InvalidStateError: responseText is only available if responseType is '' or 'text'.
+JavaScript error: https://www.homedepot.com/, line 39: InvalidStateError: responseText is only available if responseType is '' or 'text'.
+JavaScript error: resource:///actors/ContentMetaChild.jsm, line 179: InvalidStateError: JSWindowActorChild.sendAsyncMessage: JSWindowActorChild cannot send at the moment
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+[Child 4644, MediaDecoderStateMachine #1] WARNING: Decoder=17c9069d000 state=DECODING_METADATA Decode metadata failed, shutting down decoder: file /builds/worker/checkouts/gecko/dom/media/MediaDecoderStateMachine.cpp:366
+[Child 4644, MediaDecoderStateMachine #1] WARNING: Decoder=17c9069d000 Decode error: NS_ERROR_DOM_MEDIA_METADATA_ERR (0x806e0006): file /builds/worker/checkouts/gecko/dom/media/MediaDecoderStateMachine.cpp:3478
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://homedepot.ugc.bazaarvoice.com/static/1999aa/bvapi.js, line 7: NS_ERROR_NOT_INITIALIZED: 
+JavaScript error: https://homedepot.ugc.bazaarvoice.com/static/1999aa/bvapi.js, line 7: NS_ERROR_NOT_INITIALIZED: 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://homedepot.ugc.bazaarvoice.com/static/1999aa/bvapi.js, line 7: NS_ERROR_NOT_INITIALIZED: 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+[Child 4644, MediaDecoderStateMachine #1] WARNING: Decoder=17c905ca800 state=DECODING_METADATA Decode metadata failed, shutting down decoder: file /builds/worker/checkouts/gecko/dom/media/MediaDecoderStateMachine.cpp:366
+[Child 4644, MediaDecoderStateMachine #1] WARNING: Decoder=17c905ca800 Decode error: NS_ERROR_DOM_MEDIA_METADATA_ERR (0x806e0006): file /builds/worker/checkouts/gecko/dom/media/MediaDecoderStateMachine.cpp:3478
+JavaScript error: https://dev.virtualearth.net/webservices/v1/LoggingService/LoggingService.svc/Log?entry=0&fmt=1&type=3&group=MapControl&name=MVC&version=v8&mkt=pl-PL&auth=Aif9kL_IbQO95flnHttxLsFlCrSI7tAzf5FlUWJdLw-VN-J1LtxGVx6GUPrbnfqV&jsonp=Microsoft.Maps.NetworkCallbacks.f_logCallbackRequest, line 1: TypeError: Microsoft.Maps.NetworkCallbacks.f_logCallbackRequest is not a function
+JavaScript error: https://www.homedepot.com/, line 39: InvalidStateError: responseText is only available if responseType is '' or 'text'.
+JavaScript error: https://www.homedepot.com/, line 39: InvalidStateError: responseText is only available if responseType is '' or 'text'.
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+[Child 4644, MediaDecoderStateMachine #1] WARNING: Decoder=17c94115c00 state=DECODING_METADATA Decode metadata failed, shutting down decoder: file /builds/worker/checkouts/gecko/dom/media/MediaDecoderStateMachine.cpp:366
+[Child 4644, MediaDecoderStateMachine #1] WARNING: Decoder=17c94115c00 Decode error: NS_ERROR_DOM_MEDIA_METADATA_ERR (0x806e0006): file /builds/worker/checkouts/gecko/dom/media/MediaDecoderStateMachine.cpp:3478
+[Child 4644, MediaDecoderStateMachine #1] WARNING: Decoder=17c9c54e800 state=DECODING_METADATA Decode metadata failed, shutting down decoder: file /builds/worker/checkouts/gecko/dom/media/MediaDecoderStateMachine.cpp:366
+[Child 4644, MediaDecoderStateMachine #1] WARNING: Decoder=17c9c54e800 Decode error: NS_ERROR_DOM_MEDIA_METADATA_ERR (0x806e0006): file /builds/worker/checkouts/gecko/dom/media/MediaDecoderStateMachine.cpp:3478
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://homedepot.ugc.bazaarvoice.com/static/1999aa/bvapi.js, line 7: NS_ERROR_NOT_INITIALIZED: 
+1620730540602	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://homedepot.ugc.bazaarvoice.com/static/1999aa/bvapi.js, line 7: NS_ERROR_NOT_INITIALIZED: 
+JavaScript error: https://homedepot.ugc.bazaarvoice.com/static/1999aa/bvapi.js, line 7: NS_ERROR_NOT_INITIALIZED: 
+JavaScript error: https://homedepot.ugc.bazaarvoice.com/static/1999aa/bvapi.js, line 7: NS_ERROR_NOT_INITIALIZED: 
+[Child 4644, MediaDecoderStateMachine #1] WARNING: Decoder=17c92484400 state=DECODING_METADATA Decode metadata failed, shutting down decoder: file /builds/worker/checkouts/gecko/dom/media/MediaDecoderStateMachine.cpp:366
+[Child 4644, MediaDecoderStateMachine #1] WARNING: Decoder=17c92484400 Decode error: NS_ERROR_DOM_MEDIA_METADATA_ERR (0x806e0006): file /builds/worker/checkouts/gecko/dom/media/MediaDecoderStateMachine.cpp:3478
+JavaScript error: https://homedepot.ugc.bazaarvoice.com/static/1999aa/bvapi.js, line 7: NS_ERROR_NOT_INITIALIZED: 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1620731565012	Marionette	INFO	Stopped listening on port 55796
+rofileK9iDWv"
+1620730645117	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1620730646658	Marionette	INFO	Listening on port 57769
+1620730646941	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://dev.virtualearth.net/webservices/v1/LoggingService/LoggingService.svc/Log?entry=0&fmt=1&type=3&group=MapControl&name=MVC&version=v8&mkt=pl-PL&auth=Aif9kL_IbQO95flnHttxLsFlCrSI7tAzf5FlUWJdLw-VN-J1LtxGVx6GUPrbnfqV&jsonp=Microsoft.Maps.NetworkCallbacks.f_logCallbackRequest, line 1: TypeError: Microsoft.Maps.NetworkCallbacks.f_logCallbackRequest is not a function
+JavaScript error: https://assets.thdstatic.com/experiences/hd-home/vendors.3ef6bb46a59a1d486697.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/hd-home/vendors.3ef6bb46a59a1d486697.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/hd-home/vendors.3ef6bb46a59a1d486697.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+[Parent 16664, IPC I/O Parent] WARNING: file /builds/worker/checkouts/gecko/ipc/chromium/src/base/process_util_win.cc:167
+1620731564926	Marionette	INFO	Stopped listening on port 57769
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1620731939394	geckodriver	INFO	Listening on 127.0.0.1:64179
+1620731942449	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\grzeg\\AppData\\Local\\Temp\\rust_mozprofile8w3DRq"
+1620731942718	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1620731944311	Marionette	INFO	Listening on port 64191
+1620731944486	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://www.homedepot.com/, line 39: InvalidStateError: responseText is only available if responseType is '' or 'text'.
+JavaScript error: https://dev.virtualearth.net/webservices/v1/LoggingService/LoggingService.svc/Log?entry=0&fmt=1&type=3&group=MapControl&name=MVC&version=v8&mkt=pl-PL&auth=AoKTFnu3hdkRgVWl45fcxdz0WSDP6hroMDcPKXE4ZkQql3hPt3PtkCDwtNRCYgYA&jsonp=Microsoft.Maps.NetworkCallbacks.f_logCallbackRequest, line 1: TypeError: Microsoft.Maps.NetworkCallbacks.f_logCallbackRequest is not a function
+JavaScript error: https://www.homedepot.com/, line 39: InvalidStateError: responseText is only available if responseType is '' or 'text'.
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+[Child 21380, MediaDecoderStateMachine #1] WARNING: Decoder=27b16934000 state=DECODING_METADATA Decode metadata failed, shutting down decoder: file /builds/worker/checkouts/gecko/dom/media/MediaDecoderStateMachine.cpp:366
+[Child 21380, MediaDecoderStateMachine #1] WARNING: Decoder=27b16934000 Decode error: NS_ERROR_DOM_MEDIA_METADATA_ERR (0x806e0006): file /builds/worker/checkouts/gecko/dom/media/MediaDecoderStateMachine.cpp:3478
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/hd-home/vendors.3ef6bb46a59a1d486697.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://www.homedepot.com/, line 39: InvalidStateError: responseText is only available if responseType is '' or 'text'.
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://homedepot.ugc.bazaarvoice.com/static/1999aa/bvapi.js, line 7: NS_ERROR_NOT_INITIALIZED: 
+JavaScript error: https://assets.thdstatic.com/experiences/hd-home/vendors.3ef6bb46a59a1d486697.js, line 1: AbortError: The operation was aborted. 
+1620732090463	geckodriver	INFO	Listening on 127.0.0.1:64814
+1620732093503	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\grzeg\\AppData\\Local\\Temp\\rust_mozprofile2wPCjh"
+1620732093739	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1620732095150	Marionette	INFO	Listening on port 64827
+1620732095546	Marionette	WARN	TLS certificate errors will be ignored for this session
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://homedepot.ugc.bazaarvoice.com/static/1999aa/bvapi.js, line 7: NS_ERROR_NOT_INITIALIZED: 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.26149fd02f7dc3839571.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://homedepot.ugc.bazaarvoice.com/static/1999aa/bvapi.js, line 7: NS_ERROR_NOT_INITIALIZED: 
+[Child 7904, MediaDecoderStateMachine #1] WARNING: Decoder=1cab9b04c00 state=DECODING_METADATA Decode metadata failed, shutting down decoder: file /builds/worker/checkouts/gecko/dom/media/MediaDecoderStateMachine.cpp:366
+[Child 7904, MediaDecoderStateMachine #1] WARNING: Decoder=1cab9b04c00 Decode error: NS_ERROR_DOM_MEDIA_METADATA_ERR (0x806e0006): file /builds/worker/checkouts/gecko/dom/media/MediaDecoderStateMachine.cpp:3478
+[Child 7904, MediaDecoderStateMachine #1] WARNING: Decoder=1caa924d400 state=DECODING_METADATA Decode metadata failed, shutting down decoder: file /builds/worker/checkouts/gecko/dom/media/MediaDecoderStateMachine.cpp:366
+[Child 7904, MediaDecoderStateMachine #1] WARNING: Decoder=1caa924d400 Decode error: NS_ERROR_DOM_MEDIA_METADATA_ERR (0x806e0006): file /builds/worker/checkouts/gecko/dom/media/MediaDecoderStateMachine.cpp:3478
+1620732545372	geckodriver	INFO	Listening on 127.0.0.1:50430
+1620732548396	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\grzeg\\AppData\\Local\\Temp\\rust_mozprofilequbrSA"
+1620732548682	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1620732550378	Marionette	INFO	Listening on port 50440
+1620732550446	Marionette	WARN	TLS certificate errors will be ignored for this session
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+JavaScript error: https://assets.thdstatic.com/experiences/hd-home/vendors.3ef6bb46a59a1d486697.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
