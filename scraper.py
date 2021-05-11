@@ -118,7 +118,6 @@ class homeDepotScraper:
 
         return product_links
 
-
     def get_other_details(self, detail_name):
         ## A lot of product-related information is provided in the tabular form. With this function, user can retrieve any existing information.
         detail_name_formatted = f"'{detail_name}'"
@@ -138,48 +137,56 @@ class homeDepotScraper:
         ## getting metadata
         ## User specifies other detiles as a list of details. 
 
-        model = self.driver.find_element_by_xpath("//h2[contains(text(),'Model')]").text
+        ## For each find_element we use, try/except, just in case some element is not found, to prevent the whole scraping from braking
 
-        rating = self.driver.find_element_by_xpath("//span[@class='stars']").get_attribute('style')
-        rating = rating.replace("width: ", "").replace("%", "").replace(";","")
-        rating = float(rating)
+        try:
+            model = self.driver.find_element_by_xpath("//h2[contains(text(),'Model')]").text
+        except:
+            model = None
 
-        number_of_rates = self.driver.find_element_by_xpath("//span[@class='product-details__review-count']").text
-        number_of_rates = int(number_of_rates.replace("(","").replace(")",""))
+        try:
+            rating = self.driver.find_element_by_xpath("//span[@class='stars']").get_attribute('style')
+            rating = rating.replace("width: ", "").replace("%", "").replace(";","")
+            rating = float(rating)
+        except:
+            rating = None
 
-        is_on_display = self.driver.find_elements_by_xpath("//span[text()='On Display']")
-        ## If it's not on display, an element won't be found, so in such a case we set it to No. Otherwise, it's Yes (On Display)
-        if len(is_on_display) == 0:
-            is_on_display = "No"
-        else:
-            is_on_display = "Yes"
+        try:
+            number_of_rates = self.driver.find_element_by_xpath("//span[@class='product-details__review-count']").text
+            number_of_rates = int(number_of_rates.replace("(","").replace(")",""))
+        except:
+            number_of_rates = None
+
+        try:
+            is_on_display = self.driver.find_elements_by_xpath("//span[text()='On Display']")
+            ## If it's not on display, an element won't be found, so in such a case we set it to No. Otherwise, it's Yes (On Display)
+            if len(is_on_display) == 0:
+                is_on_display = "No"
+            else:
+                is_on_display = "Yes"
+        except:
+            is_on_display = None
 
         # ## The price is also not available in a straightforward way, so it must be obtained in steps
-        # price_elements = [price.text for price in self.driver.find_elements_by_xpath(".//div[@class='price']//span")]
+        try:
+            price_elements = self.driver.find_elements_by_xpath(".//div[@class='price-format__large price-format__main-price']")[0]
+            price_elements = [element.text for element in price_elements.find_elements_by_xpath(".//span")]
 
-        # ## We need to remove dollar sign and some empty string which are found in the same block as the price
-        # price_elements.remove("$")
-        # price_elements = [x for x in price_elements if x!= '']
+            ## We need to remove dollar sign and some empty string which are found in the same block as the price
+            price_elements.remove("$")
+            price_elements = [x for x in price_elements if x!= '']
 
-        # ## Now we can join the rest into a final number and have it as float
-        # price = float(".".join(price_elements))
-
-        price_elements = self.driver.find_elements_by_xpath(".//div[@class='price-format__large price-format__main-price']")[0]
-        price_elements = [element.text for element in price_elements.find_elements_by_xpath(".//span")]
-
-        ## We need to remove dollar sign and some empty string which are found in the same block as the price
-        price_elements.remove("$")
-        price_elements = [x for x in price_elements if x!= '']
-
-        ## Now we can join the rest into a final number and have it as float
-        price = float(".".join(price_elements))
+            ## Now we can join the rest into a final number and have it as float
+            price = float(".".join(price_elements))
+        except:
+            price = None
 
         
         ## Creating the list with the results for a specific product
         results = [model, rating, number_of_rates, price, is_on_display]
 
         ## We need to scroll-down to get other details
-        self.driver.execute_script("window.scrollBy(0,4500)", "")
+        self.driver.execute_script("window.scrollBy(0,4750)", "")
         time.sleep(1)
 
         ## Now we are appending other details to results
@@ -205,6 +212,7 @@ class homeDepotScraper:
                 results = [producer, product_link] + results
                 # print(results)
                 final_results.append(results)
+                
                 
             
         
@@ -251,15 +259,6 @@ def dishwasher_scraper(selected_stores, selected_brands):
 
     print(df)
         
-
-## User inputs for dishwashers
-selected_stores = {
-
-    "Manhattan 59th Street #6177": "NY 10022", 
-    "Lemmon Ave #0589": "TX 75209"
-
-}
-
 
 def scraper(selected_stores, selected_brands, product_type, other_details):
     
@@ -314,10 +313,29 @@ def scraper(selected_stores, selected_brands, product_type, other_details):
     
     final_results = [x for y in final_results for x in y]
 
-    df = pd.DataFrame(final_results, columns = ['Shop', 'Producer', 'Link', 'Model', 'Rating (%)', 'Number of Rates', 'Price', 'On Display', 
-    'Color/Finish', 'Energy Consumption (kWh/year)','Decibel (Sound) Rating', 'Product Height (in.)', 'Dishwasher Size'])
-    df.to_excel('dishwasher.xlsx')
+    column_names = ['Shop', 'Producer', 'Link', 'Model', 'Rating (%)', 'Number of Rates', 'Price', 'On Display'] + other_details
+    # df = pd.DataFrame(final_results, columns = ['Shop', 'Producer', 'Link', 'Model', 'Rating (%)', 'Number of Rates', 'Price', 'On Display', 
+    # 'Color/Finish', 'Energy Consumption (kWh/year)','Decibel (Sound) Rating', 'Product Height (in.)', 'Dishwasher Size'])
 
-selected_brands_dishwashers = ["Samsung", "LG"]
+    df = pd.DataFrame(final_results, columns = column_names)
+
+    df.to_excel(f'{product_type}.xlsx', index = False)
+
+
+## User inputs for dishwashers
+selected_stores = {
+
+    "Manhattan 59th Street #6177": "NY 10022", 
+    "Lemmon Ave #0589": "TX 75209"
+
+}
+
+## Scraping dishwashers
+selected_brands_dishwashers = ["Samsung", "LG", "Electrolux"]
 other_details_dishwasher = ['Color/Finish', 'Energy Consumption (kWh/year)','Decibel (Sound) Rating', 'Product Height (in.)', 'Dishwasher Size']
 scraper(selected_stores, selected_brands_dishwashers, "Dishwashers",other_details_dishwasher)
+
+## Scraping refrigerators
+selected_brands_refrigerators = ['Whirlpool', 'GE Appliances']
+other_details_refrigerators = ['Appliance Type'', Color/Finish', 'Energy Consumption (kWh/year)', 'Refrigerator Capacity (cu. ft.)', 'Product Height (in.)']
+scraper(selected_stores, selected_brands_refrigerators, "Refrigerators",other_details_refrigerators)
