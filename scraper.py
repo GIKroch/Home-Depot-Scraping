@@ -1,3 +1,4 @@
+from os import link
 from typing_extensions import final
 from selenium import webdriver
 import time
@@ -98,7 +99,6 @@ class homeDepotScraper:
         # time.sleep(1)
 
         ## First we need to find brand selection box and click See All
-        # brand_dimension = self.driver.find_element_by_xpath("//div[@class='dimension' and .//h2[text()='Brand']]")
         self.driver.execute_script("window.scrollBy(0,4000)", "")
         time.sleep(1)
 
@@ -106,7 +106,6 @@ class homeDepotScraper:
             EC.element_to_be_clickable((By.XPATH, "//div[@class='dimension' and .//h2[text()='Brand']]//a[@class='dimension__see-all']"))
         )
         see_all_button.click()
-        # brand_dimension.find_element_by_xpath(".//a[@class='dimension__see-all']").click()
         
         brand_dimension = WebDriverWait(self.driver, timeout = 60).until(
             EC.presence_of_element_located((By.XPATH, "//div[@class='dimension' and .//h2[text()='Brand']]//div[@class='dimension__item col__12-12']"))
@@ -137,22 +136,55 @@ class homeDepotScraper:
             # First we need to create a logic for pagination, if there is such
             paginations = self.driver.find_elements_by_xpath("//li[@class='hd-pagination__item']")
 
+            # Defining links_per_brand list
+            
+            
+
             if len(paginations) == 0:
+                # scroll_control variable is introduced as the page must be scrolled once to obtain all links available
+                scroll_control = 0
+                links_per_brand = []
+                
+                while scroll_control < 4:
                 ## We get all the links of a specific product for a particular producer
-                links = self.driver.find_elements_by_xpath("//a[@class='header product-pod--ie-fix']")
-                links = [link.get_attribute('href') for link in links]
-                product_links[selected_brand] = links
+                    links = WebDriverWait(self.driver, timeout = 60).until(
+                        EC.presence_of_element_located((By.XPATH, "//a[@class='header product-pod--ie-fix']"))
+                    )
+                    links = [link.get_attribute('href') for link in self.driver.find_elements_by_xpath("//a[@class='header product-pod--ie-fix']")]
+                    # links = self.driver.find_elements_by_xpath("//a[@class='header product-pod--ie-fix']")
+                    # links = [link.get_attribute('href') for link in links]
+                    links_per_brand.append(links)
+                    time.sleep(0.1)
+                    self.driver.execute_script("window.scrollBy(0,3000)", "")
+                    scroll_control += 1
+
+                links_per_brand = [x for y in links_per_brand for x in y]
+                links_per_brand = list(set(links_per_brand))
+                product_links[selected_brand] = links_per_brand
+            
             else:
                 pages = [page.find_element_by_xpath("./a").get_attribute('href') for page in paginations]
                 links_per_brand = []
+
                 for page in pages: 
                     self.driver.get(page)
-                    time.sleep(1)
-                    links = self.driver.find_elements_by_xpath("//a[@class='header product-pod--ie-fix']")
-                    links = [link.get_attribute('href') for link in links]
-                    links_per_brand.append(links)
+                     # scroll_control variable is introduced as the page must be scrolled once to obtain all links available
+                    scroll_control = 0  
+                
+                    while scroll_control < 4:
+                    ## We get all the links of a specific product for a particular producer
+                        links = WebDriverWait(self.driver, timeout = 60).until(
+                            EC.presence_of_element_located((By.XPATH, "//a[@class='header product-pod--ie-fix']"))
+                        )
+                        links = [link.get_attribute('href') for link in self.driver.find_elements_by_xpath("//a[@class='header product-pod--ie-fix']")]
+                        # links = [link.get_attribute('href') for link in links]
+                        links_per_brand.append(links)
+                        time.sleep(0.1)
+                        self.driver.execute_script("window.scrollBy(0,3000)", "")
+                        scroll_control += 1
                 
                 links_per_brand = [x for y in links_per_brand for x in y]
+                links_per_brand = list(set(links_per_brand))
                 product_links[selected_brand] = links_per_brand
 
         self.product_links = product_links
@@ -432,7 +464,7 @@ selected_stores = {
 }
 
 ## Scraping dishwashers
-selected_brands_dishwashers = ["Samsung", "LG", "Electrolux"]
+selected_brands_dishwashers = ["Samsung", "LG"]
 other_details_dishwasher = ['Color/Finish', 'Energy Consumption (kWh/year)','Decibel (Sound) Rating', 'Product Height (in.)', 'Dishwasher Size']
 scraper(selected_stores, selected_brands_dishwashers, "Dishwashers",other_details_dishwasher)
 
