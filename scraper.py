@@ -25,7 +25,7 @@ class homeDepotScraper:
         shop_selector = self.driver.find_element_by_xpath("//div[@class='MyStore__store']")
         shop_selector.click()
 
-        time.sleep(0.5)
+        time.sleep(1)
         ## It provides us with pop-up window on which we need to click Find Other Stores
         find_other_stores = self.driver.find_element_by_xpath("//div[@id='myStoreDropdown']//a[./span[contains(text(), 'Find Other Stores')]]")
         find_other_stores.click()
@@ -51,6 +51,7 @@ class homeDepotScraper:
         ## After that the store is selected and we can proceed with scraping data for a specific product-manufacturer
 
     def get_subdepartment_data(self, subdepartment_name):
+        print(subdepartment_name)
         ## This code is responsible for taking us to the page related to the specific subdepartment (dishwashers, refrigerators, mattresses)
 
         ## Finding All Departments on navigation bar and clicking it
@@ -69,6 +70,8 @@ class homeDepotScraper:
         subdep = self.driver.find_element_by_xpath("//a[text() = {}]".format(subdepartment_name))
         subdep.click()
 
+
+## Getting brand links methods - get_brand_links applies to Dishwashers and Refrigerators, get_brand_links_mattresses applies to mattresses - due to a slightly different page structure
     def get_brand_links(self, keyword):
         ## After getting a page for a specific product (refrigerator, dishwasher), we will now get links for producer specific pages for the products 
         ## The key-word used for this task differs between the products, so it is passed as a function's argument
@@ -78,6 +81,25 @@ class homeDepotScraper:
 
         ## Sometimes the producer name is returned along with a trademark sign ®, for simplification we will remove it
         self.brands_dictionary = {brand.get_attribute('text').replace("®",""): brand.get_attribute('href') for brand in brands}
+
+        return self.brands_dictionary
+
+    def get_brand_links_mattresses(self):
+        time.sleep(2)
+        self.driver.execute_script("window.scrollBy(0,4000)", "")
+        time.sleep(1)
+        ## First we need to find brand selection box and click See All
+        brand_dimension = self.driver.find_element_by_xpath("//div[@class='dimension' and .//h2[text()='Brand']]")
+        brand_dimension.find_element_by_xpath(".//a[@class='dimension__see-all']").click()
+        
+        brands_dictionary = {}
+
+        for brand_row in brand_dimension.find_elements_by_xpath(".//div[@class='dimension__item col__12-12']"):
+            brand = brand_row.find_element_by_xpath(".//h3[@class='refinement__link']").text
+            brand_link = brand_row.find_element_by_xpath(".//a[@class='refinement__link']").get_attribute('href')
+            brands_dictionary[brand] = brand_link
+
+        self.brands_dictionary = brands_dictionary
 
         return self.brands_dictionary
 
@@ -186,7 +208,10 @@ class homeDepotScraper:
         results = [model, rating, number_of_rates, price, is_on_display]
 
         ## We need to scroll-down to get other details
-        self.driver.execute_script("window.scrollBy(0,4750)", "")
+        if self.product_type == 'Mattresses':
+            self.driver.execute_script("window.scrollBy(0,2000)", "")
+        else:
+            self.driver.execute_script("window.scrollBy(0,4750)", "")
         time.sleep(1)
 
         ## Now we are appending other details to results
@@ -196,8 +221,9 @@ class homeDepotScraper:
         
         return results
 
-    def get_metadata_all(self, other_details):
+    def get_metadata_all(self, other_details, product_type):
         
+        self.product_type = product_type
         final_results = []
         ## Now we are running get_metadata for all the links obtained in get_product_links
         self.other_details = other_details
@@ -217,6 +243,8 @@ class homeDepotScraper:
             
         
         return final_results
+
+   
 
 ######### Dishwasher Scraper
 def dishwasher_scraper(selected_stores, selected_brands):
@@ -292,6 +320,9 @@ def scraper(selected_stores, selected_brands, product_type, other_details):
             scraper.get_subdepartment_data('Refrigerators')
             scraper.get_brand_links("Top Refrigerator Brands")
 
+        elif product_type == 'Mattresses':
+            scraper.get_subdepartment_data('Mattresses')
+            scraper.get_brand_links_mattresses()
         else:
             pass
 
@@ -305,7 +336,7 @@ def scraper(selected_stores, selected_brands, product_type, other_details):
         ## The rest must be specified by the user - For the names of the attributes scroll down to where the tables with information are (mid-page)
 
         ## For simplification we retrieve 5 additional attributes, can be many more
-        results = scraper.get_metadata_all(other_details)
+        results = scraper.get_metadata_all(other_details, product_type)
         
         ## Adding shop name to final results
         results = [[shop_details] + x for x in results]
@@ -314,12 +345,63 @@ def scraper(selected_stores, selected_brands, product_type, other_details):
     final_results = [x for y in final_results for x in y]
 
     column_names = ['Shop', 'Producer', 'Link', 'Model', 'Rating (%)', 'Number of Rates', 'Price', 'On Display'] + other_details
-    # df = pd.DataFrame(final_results, columns = ['Shop', 'Producer', 'Link', 'Model', 'Rating (%)', 'Number of Rates', 'Price', 'On Display', 
-    # 'Color/Finish', 'Energy Consumption (kWh/year)','Decibel (Sound) Rating', 'Product Height (in.)', 'Dishwasher Size'])
 
     df = pd.DataFrame(final_results, columns = column_names)
 
     df.to_excel(f'{product_type}.xlsx', index = False)
+
+def scraper_mattresses(selected_stores, selected_brands, product_type, other_details):
+    
+    ## Initiating scraping class
+    scraper = homeDepotScraper()
+
+    final_results = []
+    ## At the beginning we are selecting the store we want to focus our scraping on. 
+    ## Code, which specifies the store uses postal codes to find correct ones. 
+    ## Therefore selected_stores dictionary (user-defined) is used for this task. 
+
+    ## The scraping will be done in a loop for each store selected
+    for shop_ref, postal_code in selected_stores.items():
+        
+        shop_details = shop_ref + " " + postal_code
+
+        ## We start from getting the homepage
+        scraper.get_homepage()
+
+        print(shop_ref)
+        ## Selecting a store
+        scraper.select_store(postal_code)
+
+        scraper.get_subdepartment_data('Mattresses')
+        scraper.get_brand_links_mattresses()
+
+
+
+        ## Now we are getting direct links to products 
+        product_links = scraper.get_product_links(selected_brands)
+        print(product_links)
+
+        ## Now we are running a method which extracts all relevant information for obtained links. 
+        ## For the function to run properly, we need to specify the list other_details
+        ## Inside which user can specify the name of the attributes, one wants to retrieve from a specific product page.
+        ## Some of the attributes are returned on default:  model, rating, number_of_rates, price, is_on_display
+        ## The rest must be specified by the user - For the names of the attributes scroll down to where the tables with information are (mid-page)
+
+    #     ## For simplification we retrieve 5 additional attributes, can be many more
+    #     results = scraper.get_metadata_all(other_details)
+        
+    #     ## Adding shop name to final results
+    #     results = [[shop_details] + x for x in results]
+    #     final_results.append(results)
+    
+    # final_results = [x for y in final_results for x in y]
+
+    # column_names = ['Shop', 'Producer', 'Link', 'Model', 'Rating (%)', 'Number of Rates', 'Price', 'On Display'] + other_details
+
+    # df = pd.DataFrame(final_results, columns = column_names)
+
+    # df.to_excel(f'{product_type}.xlsx', index = False)
+
 
 
 ## User inputs for dishwashers
@@ -330,12 +412,17 @@ selected_stores = {
 
 }
 
-## Scraping dishwashers
-selected_brands_dishwashers = ["Samsung", "LG", "Electrolux"]
-other_details_dishwasher = ['Color/Finish', 'Energy Consumption (kWh/year)','Decibel (Sound) Rating', 'Product Height (in.)', 'Dishwasher Size']
-scraper(selected_stores, selected_brands_dishwashers, "Dishwashers",other_details_dishwasher)
+# ## Scraping dishwashers
+# selected_brands_dishwashers = ["Samsung", "LG", "Electrolux"]
+# other_details_dishwasher = ['Color/Finish', 'Energy Consumption (kWh/year)','Decibel (Sound) Rating', 'Product Height (in.)', 'Dishwasher Size']
+# scraper(selected_stores, selected_brands_dishwashers, "Dishwashers",other_details_dishwasher)
 
-## Scraping refrigerators
-selected_brands_refrigerators = ['Whirlpool', 'GE Appliances']
-other_details_refrigerators = ['Appliance Type'', Color/Finish', 'Energy Consumption (kWh/year)', 'Refrigerator Capacity (cu. ft.)', 'Product Height (in.)']
-scraper(selected_stores, selected_brands_refrigerators, "Refrigerators",other_details_refrigerators)
+# ## Scraping refrigerators
+# selected_brands_refrigerators = ['Whirlpool', 'GE Appliances']
+# other_details_refrigerators = ['Appliance Type'', Color/Finish', 'Energy Consumption (kWh/year)', 'Refrigerator Capacity (cu. ft.)', 'Product Height (in.)']
+# scraper(selected_stores, selected_brands_refrigerators, "Refrigerators",other_details_refrigerators)
+
+## Scraping mattresses
+selected_brands_mattresses = ['Sealy']
+other_details_mattresses = ['Size', 'Mattress Fill Type', 'Box Spring Required', 'Mattress Thickness (in.)', 'Mattress Top', 'Features', 'Product Weight (lb.)']
+scraper(selected_stores, selected_brands_mattresses, "Mattresses",other_details_mattresses)
