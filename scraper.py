@@ -43,10 +43,10 @@ class homeDepotScraper:
         )
         ## Postal-code is used for search - the direct name throws an nothing found error
         store_input_field.send_keys(postal_code)
-
+        time.sleep(1)
         store_search_button = self.driver.find_element_by_xpath("//button[@id='myStore-formButton']")
         store_search_button.click()
-
+        time.sleep(1)
         ## Now we just need to select our store (a few will be listed, however the one best matching with our postal code will be listed as first)
         select_store_button = WebDriverWait(self.driver, timeout = 60).until(
             EC.presence_of_element_located((By.XPATH, "//button[@class='localization__select-this-store bttn-outline bttn-outline--dark']"))
@@ -142,21 +142,20 @@ class homeDepotScraper:
 
             if len(paginations) == 0:
                 # scroll_control variable is introduced as the page must be scrolled once to obtain all links available
-                scroll_control = 0
+                control = 0
                 links_per_brand = []
-                
-                while scroll_control < 4:
+                page_height = self.driver.execute_script("return document.body.scrollHeight")
+
+                while control < page_height:
                 ## We get all the links of a specific product for a particular producer
                     links = WebDriverWait(self.driver, timeout = 60).until(
                         EC.presence_of_element_located((By.XPATH, "//a[@class='header product-pod--ie-fix']"))
                     )
                     links = [link.get_attribute('href') for link in self.driver.find_elements_by_xpath("//a[@class='header product-pod--ie-fix']")]
-                    # links = self.driver.find_elements_by_xpath("//a[@class='header product-pod--ie-fix']")
-                    # links = [link.get_attribute('href') for link in links]
                     links_per_brand.append(links)
-                    time.sleep(0.1)
-                    self.driver.execute_script("window.scrollBy(0,3000)", "")
-                    scroll_control += 1
+                    self.driver.execute_script("window.scrollBy(0,2000)", "")
+                    control += 2000
+                    time.sleep(1)
 
                 links_per_brand = [x for y in links_per_brand for x in y]
                 links_per_brand = list(set(links_per_brand))
@@ -168,20 +167,20 @@ class homeDepotScraper:
 
                 for page in pages: 
                     self.driver.get(page)
-                     # scroll_control variable is introduced as the page must be scrolled once to obtain all links available
-                    scroll_control = 0  
-                
-                    while scroll_control < 4:
+                     # control variable is introduced as the page must be scrolled to obtain all links available. we also get page_height in order to brake scrolling when reaching page-end
+                    control = 0
+                    page_height = self.driver.execute_script("return document.body.scrollHeight")
+
+                    while control < page_height:
                     ## We get all the links of a specific product for a particular producer
                         links = WebDriverWait(self.driver, timeout = 60).until(
                             EC.presence_of_element_located((By.XPATH, "//a[@class='header product-pod--ie-fix']"))
                         )
                         links = [link.get_attribute('href') for link in self.driver.find_elements_by_xpath("//a[@class='header product-pod--ie-fix']")]
-                        # links = [link.get_attribute('href') for link in links]
                         links_per_brand.append(links)
-                        time.sleep(0.1)
-                        self.driver.execute_script("window.scrollBy(0,3000)", "")
-                        scroll_control += 1
+                        self.driver.execute_script("window.scrollBy(0,2000)", "")
+                        control += 2000
+                        time.sleep(1)
                 
                 links_per_brand = [x for y in links_per_brand for x in y]
                 links_per_brand = list(set(links_per_brand))
@@ -194,14 +193,27 @@ class homeDepotScraper:
     def get_other_details(self, detail_name):
         ## A lot of product-related information is provided in the tabular form. With this function, user can retrieve any existing information.
         detail_name_formatted = f"'{detail_name}'"
+    
+        control = 0
 
-        ## This error handling is introduced in case some information is not available
-        try:
-            # element = self.driver.find_element_by_xpath(f"//div[text()={detail_name_formatted}]//parent::div")
-            element = self.driver.find_element_by_xpath(f"//div[@class='specifications__wrapper']//div[text()={detail_name_formatted}]//following-sibling::div")
-            detail = element.text
-        except:
-            detail = None
+        ## In this part we scroll page iteratively to find desired attributes. Sometimes part of html content is not accessible until the page is scrolled to a specific point. 
+        # It might be the case, that they are not present at all, 
+        ## so control variable is introduced to avoid indefinite scrolling
+        page_height = self.driver.execute_script("return document.body.scrollHeight")
+        detail = None
+        while detail is None:
+
+            try:
+                element = self.driver.find_element_by_xpath(f"//div[@class='specifications__wrapper']//div[text()={detail_name_formatted}]//following-sibling::div")
+                detail = element.text
+            except:
+                detail = None
+                self.driver.execute_script("window.scrollTo(0, 2000);")
+                time.sleep(0.5)
+                control += 2000
+
+            if control>= page_height:
+                break
 
         return detail
 
@@ -211,8 +223,9 @@ class homeDepotScraper:
         ## User specifies other detiles as a list of details. 
 
         ## For each find_element we use, try/except, just in case some element is not found, to prevent the whole scraping from braking
-
+        
         try:
+            
             model = self.driver.find_element_by_xpath("//h2[contains(text(),'Model')]").text
         except:
             model = None
@@ -258,11 +271,6 @@ class homeDepotScraper:
         ## Creating the list with the results for a specific product
         results = [model, rating, number_of_rates, price, is_on_display]
 
-        ## We need to scroll-down to get other details
-        if self.product_type == 'Mattresses':
-            self.driver.execute_script("window.scrollBy(0,2000)", "")
-        else:
-            self.driver.execute_script("window.scrollBy(0,4750)", "")
         time.sleep(1)
 
         ## Now we are appending other details to results
@@ -284,7 +292,7 @@ class homeDepotScraper:
             for product_link in product_links:
                 
                 self.driver.get(product_link)
-                time.sleep(2)
+                # time.sleep(2)
                 results = self.get_metadata()
                 results = [producer, product_link] + results
                 # print(results)
@@ -294,50 +302,6 @@ class homeDepotScraper:
             
         
         return final_results
-
-   
-
-######### Dishwasher Scraper
-def dishwasher_scraper(selected_stores, selected_brands):
-    
-    ## Initiating scraping class
-    scraper = homeDepotScraper()
-
-    final_results = []
-    ## At the beginning we are selecting the store we want to focus our scraping on. 
-    ## Code, which specifies the store uses postal codes to find correct ones. 
-    ## Therefore selected_stores dictionary (user-defined) is used for this task. 
-
-    ## The scraping will be done in a loop for each store selected
-    for shop_ref, postal_code in selected_stores.items():
-        
-        shop_details = shop_ref + " " + postal_code
-
-        ## We start from getting the homepage
-        scraper.get_homepage()
-
-        print(shop_ref)
-        ## Selecting a store
-        scraper.select_store(postal_code)
-
-        ## Going to dishwashers section
-        scraper.get_subdepartment_data("Dishwashers")
-
-        ## Getting links with dishwashers produced by specific manufacturers
-        brands_dictionary = scraper.get_dishwasher_links()
-
-        for selected_brand in selected_brands:
-            link = brands_dictionary[selected_brand]
-            data = scraper.scrape_data(link, shop_details, selected_brand)
-            final_results.append(data)
-
-    final_results = [x for y in final_results for x in y]
-    
-    df = pd.DataFrame(final_results, columns=['Shop', 'Producer', 'Rating(%)', 'Number of votes', 'Model', 'Price', 'Tub Material', 
-    'Sound Rating', 'Height', 'Size', 'Control Location'])
-
-    print(df)
-        
 
 def scraper(selected_stores, selected_brands, product_type, other_details):
     
@@ -401,59 +365,8 @@ def scraper(selected_stores, selected_brands, product_type, other_details):
 
     df.to_excel(f'{product_type}.xlsx', index = False)
 
-def scraper_mattresses(selected_stores, selected_brands, product_type, other_details):
-    
-    ## Initiating scraping class
-    scraper = homeDepotScraper()
 
-    final_results = []
-    ## At the beginning we are selecting the store we want to focus our scraping on. 
-    ## Code, which specifies the store uses postal codes to find correct ones. 
-    ## Therefore selected_stores dictionary (user-defined) is used for this task. 
-
-    ## The scraping will be done in a loop for each store selected
-    for shop_ref, postal_code in selected_stores.items():
-        
-        shop_details = shop_ref + " " + postal_code
-
-        ## We start from getting the homepage
-        scraper.get_homepage()
-
-        print(shop_ref)
-        ## Selecting a store
-        scraper.select_store(postal_code)
-
-        scraper.get_subdepartment_data('Mattresses')
-        scraper.get_brand_links_mattresses()
-
-
-
-        ## Now we are getting direct links to products 
-        product_links = scraper.get_product_links(selected_brands)
-        print(product_links)
-
-        ## Now we are running a method which extracts all relevant information for obtained links. 
-        ## For the function to run properly, we need to specify the list other_details
-        ## Inside which user can specify the name of the attributes, one wants to retrieve from a specific product page.
-        ## Some of the attributes are returned on default:  model, rating, number_of_rates, price, is_on_display
-        ## The rest must be specified by the user - For the names of the attributes scroll down to where the tables with information are (mid-page)
-
-    #     ## For simplification we retrieve 5 additional attributes, can be many more
-    #     results = scraper.get_metadata_all(other_details)
-        
-    #     ## Adding shop name to final results
-    #     results = [[shop_details] + x for x in results]
-    #     final_results.append(results)
-    
-    # final_results = [x for y in final_results for x in y]
-
-    # column_names = ['Shop', 'Producer', 'Link', 'Model', 'Rating (%)', 'Number of Rates', 'Price', 'On Display'] + other_details
-
-    # df = pd.DataFrame(final_results, columns = column_names)
-
-    # df.to_excel(f'{product_type}.xlsx', index = False)
-
-
+############## Running scrapers for each product
 
 ## User inputs for dishwashers
 selected_stores = {
