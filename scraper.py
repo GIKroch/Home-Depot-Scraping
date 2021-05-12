@@ -94,13 +94,11 @@ class homeDepotScraper:
 
     def get_brand_links_mattresses(self):
         
-        # time.sleep(2)
-        # self.driver.execute_script("window.scrollBy(0,4000)", "")
-        # time.sleep(1)
 
         ## First we need to find brand selection box and click See All
         self.driver.execute_script("window.scrollBy(0,4000)", "")
-        time.sleep(1)
+        # time.sleep(1)
+        self.driver.implicitly_wait(1)
 
         see_all_button = WebDriverWait(self.driver, timeout = 60).until(
             EC.element_to_be_clickable((By.XPATH, "//div[@class='dimension' and .//h2[text()='Brand']]//a[@class='dimension__see-all']"))
@@ -225,12 +223,17 @@ class homeDepotScraper:
         ## For each find_element we use, try/except, just in case some element is not found, to prevent the whole scraping from braking
         
         try:
-            
+            model = WebDriverWait(self.driver, timeout = 5).until(
+                        EC.presence_of_element_located((By.XPATH, "//h2[contains(text(),'Model')]"))
+                    )
             model = self.driver.find_element_by_xpath("//h2[contains(text(),'Model')]").text
         except:
             model = None
 
         try:
+            rating = WebDriverWait(self.driver, timeout = 5).until(
+                        EC.presence_of_element_located((By.XPATH, "//span[@class='stars']"))
+                    )
             rating = self.driver.find_element_by_xpath("//span[@class='stars']").get_attribute('style')
             rating = rating.replace("width: ", "").replace("%", "").replace(";","")
             rating = float(rating)
@@ -238,12 +241,18 @@ class homeDepotScraper:
             rating = None
 
         try:
+            number_of_rates = WebDriverWait(self.driver, timeout = 5).until(
+                        EC.presence_of_element_located((By.XPATH, "//span[@class='product-details__review-count']"))
+                    )
             number_of_rates = self.driver.find_element_by_xpath("//span[@class='product-details__review-count']").text
             number_of_rates = int(number_of_rates.replace("(","").replace(")",""))
         except:
             number_of_rates = None
 
         try:
+            is_on_display = WebDriverWait(self.driver, timeout = 5).until(
+                        EC.presence_of_element_located((By.XPATH, "//span[text()='On Display']"))
+                    )
             is_on_display = self.driver.find_elements_by_xpath("//span[text()='On Display']")
             ## If it's not on display, an element won't be found, so in such a case we set it to No. Otherwise, it's Yes (On Display)
             if len(is_on_display) == 0:
@@ -251,10 +260,13 @@ class homeDepotScraper:
             else:
                 is_on_display = "Yes"
         except:
-            is_on_display = None
+            is_on_display = "No"
 
         # ## The price is also not available in a straightforward way, so it must be obtained in steps
         try:
+            price_elements = WebDriverWait(self.driver, timeout = 5).until(
+                        EC.presence_of_element_located((By.XPATH, ".//div[@class='price-format__large price-format__main-price']"))
+                    )
             price_elements = self.driver.find_elements_by_xpath(".//div[@class='price-format__large price-format__main-price']")[0]
             price_elements = [element.text for element in price_elements.find_elements_by_xpath(".//span")]
 
@@ -270,7 +282,6 @@ class homeDepotScraper:
         
         ## Creating the list with the results for a specific product
         results = [model, rating, number_of_rates, price, is_on_display]
-
         time.sleep(1)
 
         ## Now we are appending other details to results
@@ -292,10 +303,8 @@ class homeDepotScraper:
             for product_link in product_links:
                 
                 self.driver.get(product_link)
-                # time.sleep(2)
                 results = self.get_metadata()
                 results = [producer, product_link] + results
-                # print(results)
                 final_results.append(results)
                 
                 
