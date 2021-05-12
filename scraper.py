@@ -6,6 +6,7 @@ import pandas as pd
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from datetime import datetime
 
 
 
@@ -94,28 +95,38 @@ class homeDepotScraper:
 
     def get_brand_links_mattresses(self):
         
-
         ## First we need to find brand selection box and click See All
         self.driver.execute_script("window.scrollBy(0,4000)", "")
-        # time.sleep(1)
-        self.driver.implicitly_wait(1)
 
-        see_all_button = WebDriverWait(self.driver, timeout = 60).until(
-            EC.element_to_be_clickable((By.XPATH, "//div[@class='dimension' and .//h2[text()='Brand']]//a[@class='dimension__see-all']"))
-        )
-        see_all_button.click()
-        
-        brand_dimension = WebDriverWait(self.driver, timeout = 60).until(
-            EC.presence_of_element_located((By.XPATH, "//div[@class='dimension' and .//h2[text()='Brand']]//div[@class='dimension__item col__12-12']"))
-        )
-        brand_dimension = self.driver.find_elements_by_xpath("//div[@class='dimension' and .//h2[text()='Brand']]//div[@class='dimension__item col__12-12']")
-        brands_dictionary = {}
+        ## This function has to be repeated in the loop, as it sometimes breaks, due to the script not being able to reach desired elements - however, this is a strange Selenium behaviour not a code bug itself
+        control = 0
+        ready = False
 
-        for brand_row in brand_dimension:
-            brand = brand_row.find_element_by_xpath(".//h3[@class='refinement__link']").text
-            brand_link = brand_row.find_element_by_xpath(".//a[@class='refinement__link']").get_attribute('href')
-            brands_dictionary[brand] = brand_link
-        self.brands_dictionary = brands_dictionary
+        ## We will allow for 4 repetitions
+        while control < 4 and ready == False: 
+            
+            try:
+                see_all_button = WebDriverWait(self.driver, timeout = 60).until(
+                    EC.element_to_be_clickable((By.XPATH, "//div[@class='dimension' and .//h2[text()='Brand']]//a[@class='dimension__see-all']"))
+                )
+                see_all_button.click()
+                
+                brand_dimension = WebDriverWait(self.driver, timeout = 60).until(
+                    EC.presence_of_element_located((By.XPATH, "//div[@class='dimension' and .//h2[text()='Brand']]//div[@class='dimension__item col__12-12']"))
+                )
+                brand_dimension = self.driver.find_elements_by_xpath("//div[@class='dimension' and .//h2[text()='Brand']]//div[@class='dimension__item col__12-12']")
+                brands_dictionary = {}
+
+                for brand_row in brand_dimension:
+                    brand = brand_row.find_element_by_xpath(".//h3[@class='refinement__link']").text
+                    brand_link = brand_row.find_element_by_xpath(".//a[@class='refinement__link']").get_attribute('href')
+                    brands_dictionary[brand] = brand_link
+                self.brands_dictionary = brands_dictionary
+
+                ready = True
+            except:
+                control += 1
+
 
         return self.brands_dictionary
 
@@ -133,11 +144,7 @@ class homeDepotScraper:
 
             # First we need to create a logic for pagination, if there is such
             paginations = self.driver.find_elements_by_xpath("//li[@class='hd-pagination__item']")
-
-            # Defining links_per_brand list
             
-            
-
             if len(paginations) == 0:
                 # scroll_control variable is introduced as the page must be scrolled once to obtain all links available
                 control = 0
@@ -223,7 +230,7 @@ class homeDepotScraper:
         ## For each find_element we use, try/except, just in case some element is not found, to prevent the whole scraping from braking
         
         try:
-            model = WebDriverWait(self.driver, timeout = 5).until(
+            model = WebDriverWait(self.driver, timeout = 1).until(
                         EC.presence_of_element_located((By.XPATH, "//h2[contains(text(),'Model')]"))
                     )
             model = self.driver.find_element_by_xpath("//h2[contains(text(),'Model')]").text
@@ -231,7 +238,7 @@ class homeDepotScraper:
             model = None
 
         try:
-            rating = WebDriverWait(self.driver, timeout = 5).until(
+            rating = WebDriverWait(self.driver, timeout = 1).until(
                         EC.presence_of_element_located((By.XPATH, "//span[@class='stars']"))
                     )
             rating = self.driver.find_element_by_xpath("//span[@class='stars']").get_attribute('style')
@@ -241,7 +248,7 @@ class homeDepotScraper:
             rating = None
 
         try:
-            number_of_rates = WebDriverWait(self.driver, timeout = 5).until(
+            number_of_rates = WebDriverWait(self.driver, timeout = 1).until(
                         EC.presence_of_element_located((By.XPATH, "//span[@class='product-details__review-count']"))
                     )
             number_of_rates = self.driver.find_element_by_xpath("//span[@class='product-details__review-count']").text
@@ -250,7 +257,7 @@ class homeDepotScraper:
             number_of_rates = None
 
         try:
-            is_on_display = WebDriverWait(self.driver, timeout = 5).until(
+            is_on_display = WebDriverWait(self.driver, timeout = 1).until(
                         EC.presence_of_element_located((By.XPATH, "//span[text()='On Display']"))
                     )
             is_on_display = self.driver.find_elements_by_xpath("//span[text()='On Display']")
@@ -264,7 +271,7 @@ class homeDepotScraper:
 
         # ## The price is also not available in a straightforward way, so it must be obtained in steps
         try:
-            price_elements = WebDriverWait(self.driver, timeout = 5).until(
+            price_elements = WebDriverWait(self.driver, timeout = 1).until(
                         EC.presence_of_element_located((By.XPATH, ".//div[@class='price-format__large price-format__main-price']"))
                     )
             price_elements = self.driver.find_elements_by_xpath(".//div[@class='price-format__large price-format__main-price']")[0]
@@ -385,6 +392,7 @@ selected_stores = {
 
 }
 
+start = datetime.now()
 ## Scraping dishwashers
 selected_brands_dishwashers = ["Samsung", "LG"]
 other_details_dishwasher = ['Color/Finish', 'Energy Consumption (kWh/year)','Decibel (Sound) Rating', 'Product Height (in.)', 'Dishwasher Size']
@@ -399,3 +407,6 @@ scraper(selected_stores, selected_brands_refrigerators, "Refrigerators",other_de
 selected_brands_mattresses = ['Sealy']
 other_details_mattresses = ['Size', 'Mattress Fill Type', 'Box Spring Required', 'Mattress Thickness (in.)', 'Mattress Top', 'Features', 'Product Weight (lb.)']
 scraper(selected_stores, selected_brands_mattresses, "Mattresses",other_details_mattresses)
+end = datetime.now()
+
+print(f"Total time is: {(end - start)/60}")
