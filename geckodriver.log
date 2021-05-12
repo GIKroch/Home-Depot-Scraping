@@ -5617,14 +5617,25 @@ interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
 webdriverClickElement@chrome://marionette/content/interaction.js:179:31
 JavaScript error: https://www.homedepot.com/, line 39: InvalidStateError: responseText is only available if responseType is '' or 'text'.
 JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
-ner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\grzeg\\AppData\\Local\\Temp\\rust_mozprofileSyaDJ0"
-1620833986814	Marionette	INFO	Marionette enabled
-console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
-1620833988344	Marionette	INFO	Listening on port 57337
-1620833988646	Marionette	WARN	TLS certificate errors will be ignored for this session
-JavaScript error: https://www.homedepot.com/, line 39: InvalidStateError: responseText is only available if responseType is '' or 'text'.
-JavaScript error: https://www.homedepot.com/, line 39: InvalidStateError: responseText is only available if responseType is '' or 'text'.
-JavaScript error: https://assets.thdstatic.com/experiences/hd-home/vendors.3ef6bb46a59a1d486697.js, line 1: AbortError: The operation was aborted. 
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+[Child 6168, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:544
+[Child 6168, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:544
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1620850036641	Marionette	INFO	Stopped listening on port 56016
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+9a1d486697.js, line 1: AbortError: The operation was aborted. 
 
 ###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
 
@@ -5748,7 +5759,11 @@ JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vend
 JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.95757127ec602f3786ba.js, line 1: AbortError: The operation was aborted. 
 JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.95757127ec602f3786ba.js, line 1: AbortError: The operation was aborted. 
 JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
-ner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\grzeg\\AppData\\Local\\Temp\\rust_mozprofileMyRKv4"
+1620850036604	Marionette	INFO	Stopped listening on port 58793
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+Temp\\rust_mozprofileMyRKv4"
 1620836108264	Marionette	INFO	Marionette enabled
 console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
 1620836109736	Marionette	INFO	Listening on port 59231
@@ -5813,9 +5828,12 @@ JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vend
 JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.95757127ec602f3786ba.js, line 1: AbortError: The operation was aborted. 
 JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.95757127ec602f3786ba.js, line 1: AbortError: The operation was aborted. 
 JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
-ner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\grzeg\\AppData\\Local\\Temp\\rust_mozprofile4hR6T3"
-1620837196916	Marionette	INFO	Marionette enabled
-console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+[Parent 25896, IPC I/O Parent] WARNING: file /builds/worker/checkouts/gecko/ipc/chromium/src/base/process_util_win.cc:167
+1620850036545	Marionette	INFO	Stopped listening on port 59231
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+ngs file exists, new profile?" (new Error("", "(unknown module)"))
 1620837198550	Marionette	INFO	Listening on port 61159
 1620837198699	Marionette	WARN	TLS certificate errors will be ignored for this session
 JavaScript error: https://dev.virtualearth.net/webservices/v1/LoggingService/LoggingService.svc/Log?entry=0&fmt=1&type=3&group=MapControl&name=MVC&version=v8&mkt=pl-PL&auth=AoKTFnu3hdkRgVWl45fcxdz0WSDP6hroMDcPKXE4ZkQql3hPt3PtkCDwtNRCYgYA&jsonp=Microsoft.Maps.NetworkCallbacks.f_logCallbackRequest, line 1: TypeError: Microsoft.Maps.NetworkCallbacks.f_logCallbackRequest is not a function
@@ -5901,3 +5919,342 @@ JavaScript error: https://assets.thdstatic.com/experiences/hd-home/vendors.3ef6b
 ###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
 
 JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1620850036641	Marionette	INFO	Stopped listening on port 61159
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+FO	Listening on port 49778
+1620846749730	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://dev.virtualearth.net/webservices/v1/LoggingService/LoggingService.svc/Log?entry=0&fmt=1&type=3&group=MapControl&name=MVC&version=v8&mkt=pl-PL&auth=AoKTFnu3hdkRgVWl45fcxdz0WSDP6hroMDcPKXE4ZkQql3hPt3PtkCDwtNRCYgYA&jsonp=Microsoft.Maps.NetworkCallbacks.f_logCallbackRequest, line 1: TypeError: Microsoft.Maps.NetworkCallbacks.f_logCallbackRequest is not a function
+JavaScript error: https://www.homedepot.com/, line 39: InvalidStateError: responseText is only available if responseType is '' or 'text'.
+JavaScript error: https://www.homedepot.com/, line 39: InvalidStateError: responseText is only available if responseType is '' or 'text'.
+JavaScript error: https://www.homedepot.com/, line 39: InvalidStateError: responseText is only available if responseType is '' or 'text'.
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.95757127ec602f3786ba.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.95757127ec602f3786ba.js, line 1: AbortError: The operation was aborted. 
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.95757127ec602f3786ba.js, line 1: AbortError: The operation was aborted. 
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.95757127ec602f3786ba.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.95757127ec602f3786ba.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://www.homedepot.com/, line 39: InvalidStateError: responseText is only available if responseType is '' or 'text'.
+JavaScript error: https://www.homedepot.com/, line 39: InvalidStateError: responseText is only available if responseType is '' or 'text'.
+JavaScript error: resource:///actors/ContentMetaChild.jsm, line 179: InvalidStateError: JSWindowActorChild.sendAsyncMessage: JSWindowActorChild cannot send at the moment
+1620846846364	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.95757127ec602f3786ba.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.95757127ec602f3786ba.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.95757127ec602f3786ba.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.95757127ec602f3786ba.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.95757127ec602f3786ba.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: , line 0: NS_ERROR_NOT_AVAILABLE
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+[Parent 9640, IPC I/O Parent] WARNING: file /builds/worker/checkouts/gecko/ipc/chromium/src/base/process_util_win.cc:167
+1620850036295	Marionette	INFO	Stopped listening on port 49778
+
+1620846930260	Marionette	INFO	Listening on port 50319
+1620846930376	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://dev.virtualearth.net/webservices/v1/LoggingService/LoggingService.svc/Log?entry=0&fmt=1&type=3&group=MapControl&name=MVC&version=v8&mkt=pl-PL&auth=Aif9kL_IbQO95flnHttxLsFlCrSI7tAzf5FlUWJdLw-VN-J1LtxGVx6GUPrbnfqV&jsonp=Microsoft.Maps.NetworkCallbacks.f_logCallbackRequest, line 1: TypeError: Microsoft.Maps.NetworkCallbacks.f_logCallbackRequest is not a function
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.95757127ec602f3786ba.js, line 1: AbortError: The operation was aborted. 
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.95757127ec602f3786ba.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.95757127ec602f3786ba.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.95757127ec602f3786ba.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.95757127ec602f3786ba.js, line 1: AbortError: The operation was aborted. 
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.95757127ec602f3786ba.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.95757127ec602f3786ba.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.95757127ec602f3786ba.js, line 1: AbortError: The operation was aborted. 
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel error: cannot send/recv
+
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.95757127ec602f3786ba.js, line 1: AbortError: The operation was aborted. 
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.95757127ec602f3786ba.js, line 1: AbortError: The operation was aborted. 
+1620847460770	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+JavaScript error: https://cdn.quantummetric.com/qscripts/quantum-homedepot.js, line 86: TypeError: f.stringify is not a function
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.95757127ec602f3786ba.js, line 1: AbortError: The operation was aborted. 
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.95757127ec602f3786ba.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.95757127ec602f3786ba.js, line 1: AbortError: The operation was aborted. 
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.95757127ec602f3786ba.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.95757127ec602f3786ba.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.95757127ec602f3786ba.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.95757127ec602f3786ba.js, line 1: AbortError: The operation was aborted. 
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.95757127ec602f3786ba.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.95757127ec602f3786ba.js, line 1: AbortError: The operation was aborted. 
+1620850037179	Marionette	INFO	Stopped listening on port 50319
+0848029638	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\grzeg\\AppData\\Local\\Temp\\rust_mozprofileoK8cbs"
+1620848029947	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1620848031541	Marionette	INFO	Listening on port 52493
+1620848031679	Marionette	WARN	TLS certificate errors will be ignored for this session
+1620848043033	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:237:19
+TimedPromise@chrome://marionette/content/sync.js:222:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:431:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: , line 0: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/hd-home/vendors.3ef6bb46a59a1d486697.js, line 1: AbortError: The operation was aborted. 
+
+###!!! [Parent][RunMessage] Error: Channel error: cannot send/recv
+
+JavaScript error: https://assets.thdstatic.com/experiences/hd-home/vendors.3ef6bb46a59a1d486697.js, line 1: AbortError: The operation was aborted. 
+
+###!!! [Parent][RunMessage] Error: Channel error: cannot send/recv
+
+
+###!!! [Parent][RunMessage] Error: Channel error: cannot send/recv
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+JavaScript error: https://assets.thdstatic.com/experiences/hd-home/vendors.3ef6bb46a59a1d486697.js, line 1: AbortError: The operation was aborted. 
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+JavaScript error: https://assets.thdstatic.com/experiences/hd-home/vendors.3ef6bb46a59a1d486697.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/hd-home/vendors.3ef6bb46a59a1d486697.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://dev.virtualearth.net/webservices/v1/LoggingService/LoggingService.svc/Log?entry=0&fmt=1&type=3&group=MapControl&name=MVC&version=v8&mkt=pl-PL&auth=AoKTFnu3hdkRgVWl45fcxdz0WSDP6hroMDcPKXE4ZkQql3hPt3PtkCDwtNRCYgYA&jsonp=Microsoft.Maps.NetworkCallbacks.f_logCallbackRequest, line 1: TypeError: Microsoft.Maps.NetworkCallbacks.f_logCallbackRequest is not a function
+JavaScript error: https://assets.thdstatic.com/experiences/hd-home/vendors.3ef6bb46a59a1d486697.js, line 1: AbortError: The operation was aborted. 
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+JavaScript error: https://assets.thdstatic.com/experiences/hd-home/vendors.3ef6bb46a59a1d486697.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/hd-home/vendors.3ef6bb46a59a1d486697.js, line 1: AbortError: The operation was aborted. 
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+JavaScript error: https://assets.thdstatic.com/experiences/hd-home/vendors.3ef6bb46a59a1d486697.js, line 1: AbortError: The operation was aborted. 
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+JavaScript error: https://assets.thdstatic.com/experiences/hd-home/vendors.3ef6bb46a59a1d486697.js, line 1: AbortError: The operation was aborted. 
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+JavaScript error: https://assets.thdstatic.com/experiences/hd-home/vendors.3ef6bb46a59a1d486697.js, line 1: AbortError: The operation was aborted. 
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+JavaScript error: https://assets.thdstatic.com/experiences/hd-home/vendors.3ef6bb46a59a1d486697.js, line 1: AbortError: The operation was aborted. 
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel error: cannot send/recv
+
+
+###!!! [Parent][RunMessage] Error: Channel error: cannot send/recv
+
+[Parent 5092, IPC I/O Parent] WARNING: file /builds/worker/checkouts/gecko/ipc/chromium/src/base/process_util_win.cc:167
+[Parent 5092, IPC I/O Parent] WARNING: file /builds/worker/checkouts/gecko/ipc/chromium/src/base/process_util_win.cc:167
+1620850036493	Marionette	INFO	Stopped listening on port 52493
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+ew Error("", "(unknown module)"))
+1620849702094	Marionette	INFO	Listening on port 54804
+1620849702229	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://dev.virtualearth.net/webservices/v1/LoggingService/LoggingService.svc/Log?entry=0&fmt=1&type=3&group=MapControl&name=MVC&version=v8&mkt=pl-PL&auth=AoKTFnu3hdkRgVWl45fcxdz0WSDP6hroMDcPKXE4ZkQql3hPt3PtkCDwtNRCYgYA&jsonp=Microsoft.Maps.NetworkCallbacks.f_logCallbackRequest, line 1: TypeError: Microsoft.Maps.NetworkCallbacks.f_logCallbackRequest is not a function
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.95757127ec602f3786ba.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.95757127ec602f3786ba.js, line 1: AbortError: The operation was aborted. 
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.95757127ec602f3786ba.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: resource:///actors/ContentMetaChild.jsm, line 179: InvalidStateError: JSWindowActorChild.sendAsyncMessage: JSWindowActorChild cannot send at the moment
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.95757127ec602f3786ba.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.95757127ec602f3786ba.js, line 1: AbortError: The operation was aborted. 
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel error: cannot send/recv
+
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.95757127ec602f3786ba.js, line 1: AbortError: The operation was aborted. 
+[Parent 30512, IPC I/O Parent] WARNING: file /builds/worker/checkouts/gecko/ipc/chromium/src/base/process_util_win.cc:167
+1620850036307	Marionette	INFO	Stopped listening on port 54804
+round" "-no-remote" "-profile" "C:\\Users\\grzeg\\AppData\\Local\\Temp\\rust_mozprofileFcYTpo"
+1620849876054	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1620849877678	Marionette	INFO	Listening on port 55293
+1620849877843	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://www.homedepot.com/, line 39: InvalidStateError: responseText is only available if responseType is '' or 'text'.
+JavaScript error: https://www.homedepot.com/, line 39: InvalidStateError: responseText is only available if responseType is '' or 'text'.
+1620849890486	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.95757127ec602f3786ba.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.95757127ec602f3786ba.js, line 1: AbortError: The operation was aborted. 
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.95757127ec602f3786ba.js, line 1: AbortError: The operation was aborted. 
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.95757127ec602f3786ba.js, line 1: AbortError: The operation was aborted. 
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1620850036333	Marionette	INFO	Stopped listening on port 55293
+1620850254441	geckodriver	INFO	Listening on 127.0.0.1:55961
+1620850257504	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\grzeg\\AppData\\Local\\Temp\\rust_mozprofileO8V1Pc"
+1620850257762	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1620850259176	Marionette	INFO	Listening on port 55974
+1620850259552	Marionette	WARN	TLS certificate errors will be ignored for this session
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel error: cannot send/recv
+
+JavaScript error: https://dev.virtualearth.net/webservices/v1/LoggingService/LoggingService.svc/Log?entry=0&fmt=1&type=3&group=MapControl&name=MVC&version=v8&mkt=pl-PL&auth=Aif9kL_IbQO95flnHttxLsFlCrSI7tAzf5FlUWJdLw-VN-J1LtxGVx6GUPrbnfqV&jsonp=Microsoft.Maps.NetworkCallbacks.f_logCallbackRequest, line 1: TypeError: Microsoft.Maps.NetworkCallbacks.f_logCallbackRequest is not a function
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.95757127ec602f3786ba.js, line 1: AbortError: The operation was aborted. 
+1620850597198	Marionette	INFO	Stopped listening on port 55974
+0850429229	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\grzeg\\AppData\\Local\\Temp\\rust_mozprofile2yUfus"
+1620850429461	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1620850431042	Marionette	INFO	Listening on port 56427
+1620850431288	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://www.homedepot.com/, line 39: InvalidStateError: responseText is only available if responseType is '' or 'text'.
+JavaScript error: https://www.homedepot.com/, line 39: InvalidStateError: responseText is only available if responseType is '' or 'text'.
+
+###!!! [Parent][RunMessage] Error: Channel error: cannot send/recv
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/runtime.ee39938392e216917651.js, line 1: ChunkLoadError: Loading chunk 30 failed.
+(error: https://assets.thdstatic.com/experiences/major-appliances/product.39fcda90480f4f060fc7.js)
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+JavaScript error: https://assets.thdstatic.com/experiences/major-appliances/vendors.95757127ec602f3786ba.js, line 1: AbortError: The operation was aborted. 
+1620850597198	Marionette	INFO	Stopped listening on port 56427

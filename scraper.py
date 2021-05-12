@@ -13,8 +13,9 @@ from datetime import datetime
 class homeDepotScraper:
 
 ## General methods
-    def __init__(self):
-        self.driver = webdriver.Firefox(executable_path = r"C:\Users\grzeg\OneDrive\Pulpit\Point72\geckodriver.exe")
+    def __init__(self, path_to_geckodriver = None):
+        ## User must provide path to geckodriver, which is a Firefox binding to Selenium. If geckodriver's path is added environmental paths.  
+        self.driver = webdriver.Firefox(executable_path = path_to_geckodriver)
         ## Maximizing window
         self.driver.maximize_window()
 
@@ -145,35 +146,17 @@ class homeDepotScraper:
             # First we need to create a logic for pagination, if there is such
             paginations = self.driver.find_elements_by_xpath("//li[@class='hd-pagination__item']")
             
-            if len(paginations) == 0:
-                # scroll_control variable is introduced as the page must be scrolled once to obtain all links available
-                control = 0
-                links_per_brand = []
-                page_height = self.driver.execute_script("return document.body.scrollHeight")
-
-                while control < page_height:
-                ## We get all the links of a specific product for a particular producer
-                    links = WebDriverWait(self.driver, timeout = 60).until(
-                        EC.presence_of_element_located((By.XPATH, "//a[@class='header product-pod--ie-fix']"))
-                    )
-                    links = [link.get_attribute('href') for link in self.driver.find_elements_by_xpath("//a[@class='header product-pod--ie-fix']")]
-                    links_per_brand.append(links)
-                    self.driver.execute_script("window.scrollBy(0,2000)", "")
-                    control += 2000
-                    time.sleep(1)
-
-                links_per_brand = [x for y in links_per_brand for x in y]
-                links_per_brand = list(set(links_per_brand))
-                product_links[selected_brand] = links_per_brand
-            
+            ## There might be a case where there is no product for a specific producer, we need to control for that
+            no_product = self.driver.find_elements_by_xpath("//div[@class='results-wrapped--no-products']")
+            ## In such a case where there is indeed no product, we just move to the next iteration
+            if len(no_product) != 0:
+                print(selected_brand, "No Product")
+                continue
             else:
-                pages = [page.find_element_by_xpath("./a").get_attribute('href') for page in paginations]
-                links_per_brand = []
-
-                for page in pages: 
-                    self.driver.get(page)
-                     # control variable is introduced as the page must be scrolled to obtain all links available. we also get page_height in order to brake scrolling when reaching page-end
+                if len(paginations) == 0:
+                    # scroll_control variable is introduced as the page must be scrolled once to obtain all links available
                     control = 0
+                    links_per_brand = []
                     page_height = self.driver.execute_script("return document.body.scrollHeight")
 
                     while control < page_height:
@@ -186,14 +169,37 @@ class homeDepotScraper:
                         self.driver.execute_script("window.scrollBy(0,2000)", "")
                         control += 2000
                         time.sleep(1)
+
+                    links_per_brand = [x for y in links_per_brand for x in y]
+                    links_per_brand = list(set(links_per_brand))
+                    product_links[selected_brand] = links_per_brand
                 
-                links_per_brand = [x for y in links_per_brand for x in y]
-                links_per_brand = list(set(links_per_brand))
-                product_links[selected_brand] = links_per_brand
+                else:
+                    pages = [page.find_element_by_xpath("./a").get_attribute('href') for page in paginations]
+                    links_per_brand = []
 
-        self.product_links = product_links
+                    for page in pages: 
+                        self.driver.get(page)
+                        # control variable is introduced as the page must be scrolled to obtain all links available. we also get page_height in order to brake scrolling when reaching page-end
+                        control = 0
+                        page_height = self.driver.execute_script("return document.body.scrollHeight")
 
-        return product_links
+                        while control < page_height:
+                        ## We get all the links of a specific product for a particular producer
+                            links = WebDriverWait(self.driver, timeout = 60).until(
+                                EC.presence_of_element_located((By.XPATH, "//a[@class='header product-pod--ie-fix']"))
+                            )
+                            links = [link.get_attribute('href') for link in self.driver.find_elements_by_xpath("//a[@class='header product-pod--ie-fix']")]
+                            links_per_brand.append(links)
+                            self.driver.execute_script("window.scrollBy(0,2000)", "")
+                            control += 2000
+                            time.sleep(1)
+                    
+                    links_per_brand = [x for y in links_per_brand for x in y]
+                    links_per_brand = list(set(links_per_brand))
+                    product_links[selected_brand] = links_per_brand
+
+            self.product_links = product_links
 
     def get_other_details(self, detail_name):
         ## A lot of product-related information is provided in the tabular form. With this function, user can retrieve any existing information.
@@ -319,10 +325,10 @@ class homeDepotScraper:
         
         return final_results
 
-def scraper(selected_stores, selected_brands, product_type, other_details):
+def scraper(selected_stores, selected_brands, product_type, other_details, path_to_geckodriver):
     
     ## Initiating scraping class
-    scraper = homeDepotScraper()
+    scraper = homeDepotScraper(path_to_geckodriver)
 
     final_results = []
     ## At the beginning we are selecting the store we want to focus our scraping on. 
@@ -358,7 +364,9 @@ def scraper(selected_stores, selected_brands, product_type, other_details):
             pass
 
         ## Now we are getting direct links to products 
-        product_links = scraper.get_product_links(selected_brands)
+        ## If no_product == True, it means that for a specific brand there are no products available. In such a case we continue to the next iteration
+        scraper.get_product_links(selected_brands)
+        
         
         ## Now we are running a method which extracts all relevant information for obtained links. 
         ## For the function to run properly, we need to specify the list other_details
@@ -392,21 +400,21 @@ selected_stores = {
 
 }
 
-start = datetime.now()
-## Scraping dishwashers
-selected_brands_dishwashers = ["Samsung", "LG"]
-other_details_dishwasher = ['Color/Finish', 'Energy Consumption (kWh/year)','Decibel (Sound) Rating', 'Product Height (in.)', 'Dishwasher Size']
-scraper(selected_stores, selected_brands_dishwashers, "Dishwashers",other_details_dishwasher)
+def run_all(path_to_geckodriver):
 
-## Scraping refrigerators
-selected_brands_refrigerators = ['Whirlpool', 'GE Appliances']
-other_details_refrigerators = ['Appliance Type', 'Color/Finish', 'Energy Consumption (kWh/year)', 'Refrigerator Capacity (cu. ft.)', 'Product Height (in.)']
-scraper(selected_stores, selected_brands_refrigerators, "Refrigerators",other_details_refrigerators)
+    ## Scraping dishwashers
+    selected_brands_dishwashers = ["Samsung", "LG"]
+    other_details_dishwasher = ['Color/Finish', 'Energy Consumption (kWh/year)','Decibel (Sound) Rating', 'Product Height (in.)', 'Dishwasher Size']
+    scraper(selected_stores, selected_brands_dishwashers, "Dishwashers",other_details_dishwasher, path_to_geckodriver)
 
-## Scraping mattresses
-selected_brands_mattresses = ['Sealy']
-other_details_mattresses = ['Size', 'Mattress Fill Type', 'Box Spring Required', 'Mattress Thickness (in.)', 'Mattress Top', 'Features', 'Product Weight (lb.)']
-scraper(selected_stores, selected_brands_mattresses, "Mattresses",other_details_mattresses)
-end = datetime.now()
+    ## Scraping refrigerators
+    selected_brands_refrigerators = ['Whirlpool', 'GE Appliances']
+    other_details_refrigerators = ['Appliance Type', 'Color/Finish', 'Energy Consumption (kWh/year)', 'Refrigerator Capacity (cu. ft.)', 'Product Height (in.)']
+    scraper(selected_stores, selected_brands_refrigerators, "Refrigerators",other_details_refrigerators, path_to_geckodriver)
 
-print(f"Total time is: {(end - start)/60}")
+    ## Scraping mattresses
+    selected_brands_mattresses = ['Sealy']
+    other_details_mattresses = ['Size', 'Mattress Fill Type', 'Box Spring Required', 'Mattress Thickness (in.)', 'Mattress Top', 'Features', 'Product Weight (lb.)']
+    scraper(selected_stores, selected_brands_mattresses, "Mattresses",other_details_mattresses, path_to_geckodriver)
+
+run_all(r"C:\Users\grzeg\OneDrive\Pulpit\Point72\geckodriver.exe")
