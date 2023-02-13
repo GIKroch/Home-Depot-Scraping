@@ -164,7 +164,17 @@ class homeDepotScraper:
                         links = WebDriverWait(self.driver, timeout = 60).until(
                             EC.presence_of_element_located((By.XPATH, "//a[@class='header product-pod--ie-fix']"))
                         )
-                        links = [link.get_attribute('href') for link in self.driver.find_elements_by_xpath("//a[@class='header product-pod--ie-fix']")]
+
+                        ## Again, sometimes the required element is not caught, so the action must be repeated in order to complete the process
+                        control_links = 0
+                        links_found = False
+                        while control_links < 4 and links_found == False:
+                            try:
+                                links = [link.get_attribute('href') for link in self.driver.find_elements_by_xpath("//a[@class='header product-pod--ie-fix']")]
+                                links_found = True
+                            except:
+                                control_links += 1
+
                         links_per_brand.append(links)
                         self.driver.execute_script("window.scrollBy(0,2000)", "")
                         control += 2000
@@ -189,7 +199,16 @@ class homeDepotScraper:
                             links = WebDriverWait(self.driver, timeout = 60).until(
                                 EC.presence_of_element_located((By.XPATH, "//a[@class='header product-pod--ie-fix']"))
                             )
-                            links = [link.get_attribute('href') for link in self.driver.find_elements_by_xpath("//a[@class='header product-pod--ie-fix']")]
+
+                            ## Again, sometimes the required element is not caught, so the action must be repeated in order to complete the process
+                            control_links = 0
+                            links_found = False
+                            while control_links < 4 and links_found == False:
+                                try:
+                                    links = [link.get_attribute('href') for link in self.driver.find_elements_by_xpath("//a[@class='header product-pod--ie-fix']")]
+                                    links_found = True
+                                except:
+                                    control_links += 1
                             links_per_brand.append(links)
                             self.driver.execute_script("window.scrollBy(0,2000)", "")
                             control += 2000
@@ -390,17 +409,19 @@ def scraper(selected_stores, selected_brands, product_type, other_details, path_
     df.to_excel(f'{product_type}.xlsx', index = False)
 
 
-############## Running scrapers for each product
 
-## User inputs for dishwashers
-selected_stores = {
 
-    "Manhattan 59th Street #6177": "NY 10022", 
-    "Lemmon Ave #0589": "TX 75209"
-
-}
-
+## The whole script is based on Selenium, using geckodriver (binding for Firefox). To run it, path to geckodriver must be provided, unless it's already an environmental variable
+## then there is no need to provide a path (in function by default it's None)
 def run_all(path_to_geckodriver):
+
+    ## User inputs for dishwashers
+    selected_stores = {
+
+        "Manhattan 59th Street #6177": "NY 10022", 
+        "Lemmon Ave #0589": "TX 75209"
+
+    }
 
     ## Scraping dishwashers
     selected_brands_dishwashers = ["Samsung", "LG"]
